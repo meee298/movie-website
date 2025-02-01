@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Movie</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background */
+            color: #fff;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the footer sticks to the bottom */
+        }
+
+        header {
+            background-color: #e50914; /* Netflix-like red */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Movie Container */
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex: 1; /* Allow content to grow and push footer to the bottom */
+        }
+
+        /* Movie Sections */
+        section {
+            background-color: #262626; /* Dark gray for movie cards */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            width: 200px;
+            text-align: center;
+            padding: 15px;
+        }
+
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        figcaption {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #e50914; /* Red for movie titles */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #262626; /* Dark gray for footer */
+            color: #ccc; /* Light gray text */
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: #e50914; /* Red for links */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #fff; /* White on hover */
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .movie-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Next Movie</h1>
+    </header>
+    <div class="movie-container">
+        <section>
+            <a href="details1.html">
+                <img src="717eUMztmbL.webp" alt="Movie Poster">
+            </a>
+            <figcaption>The Blacklist</figcaption>
+        </section>
+        <section>
+            <a href="details2.html">
+                <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
+            </a>
+            <figcaption>Çukur</figcaption>
+        </section>
+        <section>
+            <a href="details3.html">
+                <img src="81u+55risFL.webp" alt="Movie Poster">
+            </a>
+            <figcaption>Lovely Runner</figcaption>
+        </section>
+        <section>
+            <a href="details4.html">
+                <img src="a1820276624908f3d45de4abbaf24317.webp" alt="Movie Poster">
+            </a>
+            <figcaption>Rocky 4</figcaption>
+        </section>
+        <section>
+            <a href="home.html">
+                <img src="c9c4b0bbd7f30d1cec2dea10942ff8e9.webp" alt="Movie Poster">
+            </a>
+            <figcaption>The Penthouse</figcaption>
+        </section>
+        <section>
+            <a href="details5.html">
+                <img src="81YsWAgE2eL.webp" alt="Movie Poster">
+            </a>
+            <figcaption>Pompeii</figcaption>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
+    </footer>
+</body>
+</html>

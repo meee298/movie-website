@@ -1,0 +1,141 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a; /* Dark background */
+    color: #fff;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #e50914; /* Netflix-like red */
+    color: #fff;
+    padding: 15px 20px; /* Adjusted padding */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2rem; /* Adjusted font size */
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: normal; /* Allow text to wrap if needed */
+    color: #fff;
+}
+
+h2 {
+    color: #e50914; /* Red for headings */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    color: #ccc; /* Light gray for paragraph text */
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #e50914; /* Red for links */
+    font-weight: 500;
+    transition: color 0.3s ease;
+    white-space: normal; /* Ensure text wraps if needed */
+    overflow: visible; /* Ensure text is not hidden */
+    text-overflow: clip; /* Disable ellipsis */
+}
+
+a:hover {
+    color: #fff; /* White on hover */
+}
+
+section {
+    background-color: #262626; /* Dark gray for sections */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Poster and Paragraph Layout */
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.poster {
+    flex: 0 0 300px; /* Fixed width for the poster */
+}
+
+.description {
+    flex: 1; /* Takes remaining space */
+}
+
+/* Footer */
+footer {
+    background-color: #262626; /* Dark gray for footer */
+    color: #ccc; /* Light gray text */
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+    color: #e50914; /* Red for links */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer a:hover {
+    color: #fff; /* White on hover */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Adjusted for smaller screens */
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .poster {
+        flex: 0 0 auto;
+        margin-bottom: 20px;
+    }
+}
