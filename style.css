@@ -229,6 +229,8 @@ footer a:hover {
 .poster img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .description {
@@ -244,9 +246,20 @@ footer a:hover {
 
     .poster {
         margin-bottom: 20px; /* Add space between poster and description */
+        flex: 0 0 auto; /* Reset flex for smaller screens */
     }
 
     .description {
         text-align: center; /* Center-align text for better readability */
+    }
+
+    .additional-info {
+        flex-direction: column; /* Stack additional info vertically */
+        align-items: center; /* Center-align items */
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+
+    img {
+        max-width: 200px; /* Adjust image size for smaller screens */
     }
 }
