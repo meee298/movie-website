@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Movie</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <style>
         /* General Styles */
         body {
@@ -21,9 +22,10 @@
         header {
             background-color: #e50914; /* Netflix-like red */
             color: #fff;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative; /* For positioning the search bar */
         }
 
         h1 {
@@ -31,7 +33,132 @@
             font-size: 2.5rem;
             font-weight: 600;
             letter-spacing: 1px;
+            padding-bottom: 20px;
         }
+
+        nav {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end; /* Align search bar to the right */
+    align-items: center;
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Search Toggle Icon */
+.material-symbols-outlined {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: absolute;
+    right: 0; /* Position the icon to the right */
+    z-index: 1; /* Ensure the icon is above the search bar */
+}
+
+.material-symbols-outlined svg {
+    width: 24px;
+    height: 24px;
+    fill: #e50914; /* Netflix-like red */
+}
+
+.material-symbols-outlined:hover {
+    transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #262626;
+    padding: 8px 12px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    position: absolute;
+    right: 0;
+}
+
+.search-container:hover .search-bar {
+    width: 250px; /* Expanded width */
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-bar input {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+}
+
+.search-bar .clear-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding-right: 30px;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar .clear-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #e50914;
+}
+
+.search-bar input:not(:placeholder-shown) + .clear-icon {
+    display: flex; /* Show clear icon when input has text */
+}
+
+/* Suggestions Dropdown */
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #262626;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #444;
+}
 
         /* Movie Container */
         .movie-container {
@@ -79,7 +206,7 @@
 
         /* Footer */
         footer {
-            background-color: #262626; /* Dark gray for footer */
+            background-color: #1a1a1a; /* Match the body background */
             color: #ccc; /* Light gray text */
             text-align: center;
             padding: 15px;
@@ -108,15 +235,45 @@
                 width: 80%;
                 max-width: 300px;
             }
+
+            .search-bar input {
+                width: 150px; /* Smaller width for mobile */
+            }
         }
     </style>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Fuse.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 </head>
 <body>
     <header>
         <h1>Next Movie</h1>
+        <!-- Navigation Bar with Search -->
+        <div class="search-container">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search for a movie..." 
+                >
+                <button class="clear-icon" onclick="clearSearch()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636l4.95 4.95z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+        
+            <!-- Search Icon -->
+            
+            <span class="material-symbols-outlined" onclick="toggleSearch()">
+                search
+                </span>
+        </div>
     </header>
+    <!-- Movie Container -->
     <div class="movie-container">
         <section>
             <a href="details1.html">
@@ -159,5 +316,93 @@
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
+
+    <!-- JavaScript for Search Functionality -->
+    <script>
+    
+    // Toggle Search Bar
+    function toggleSearch() {
+        const searchBar = document.querySelector('.search-bar');
+        searchBar.classList.toggle('active');
+    }
+
+    // Clear Search Input
+    function clearSearch() {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.value = '';
+        searchInput.focus();
+        document.getElementById('suggestions').style.display = 'none';
+        searchMovie(); // Reset the movie list
+    }
+
+    // Search Functionality
+    function searchMovie() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const movieSections = document.querySelectorAll('.movie-container section');
+
+        movieSections.forEach(section => {
+            const movieTitle = section.querySelector('figcaption').textContent.toLowerCase();
+            if (movieTitle.includes(searchTerm)) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    }
+
+    // Suggestions (using Fuse.js)
+    const movies = [
+        "The Blacklist",
+        "Çukur",
+        "Lovely Runner",
+        "Rocky 4",
+        "The Penthouse",
+        "Pompeii"
+    ];
+
+    const fuse = new Fuse(movies, {
+        includeScore: true,
+        threshold: 0.3,
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        if (query === '') {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        const results = fuse.search(query);
+        showSuggestions(results);
+    });
+
+    function showSuggestions(results) {
+        const suggestionsContainer = document.getElementById('suggestions');
+        suggestionsContainer.innerHTML = '';
+
+        if (results.length === 0) {
+            suggestionsContainer.innerHTML = "<div class='suggestion-item'>No matches found</div>";
+            suggestionsContainer.style.display = 'block';
+            return;
+        }
+
+        results.forEach(result => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.className = 'suggestion-item';
+            suggestionItem.textContent = result.item;
+            suggestionItem.addEventListener('click', () => {
+                document.getElementById('searchInput').value = result.item;
+                suggestionsContainer.style.display = 'none';
+                searchMovie();
+            });
+            suggestionsContainer.appendChild(suggestionItem);
+        });
+        
+        suggestionsContainer.style.display = 'block';
+    }
+
+    </script>
 </body>
 </html>
