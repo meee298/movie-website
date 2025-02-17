@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -20,21 +22,389 @@
             </div>
             <div class="description">
                 <p>The Blacklist is a thrilling crime drama series that follows Raymond "Red" Reddington, a former criminal mastermind who mysteriously surrenders to the FBI. He offers to help capture the world's most dangerous criminals—but only if he works exclusively with rookie profiler Elizabeth Keen. As they unravel high-stakes cases, dark secrets about Red’s true motives and Liz’s past emerge. With intense twists, espionage, and unpredictable alliances, The Blacklist keeps viewers hooked through its gripping storytelling and brilliant performances.</p>
+                <!-- Additional info section -->
+                <div class="additional-info">
+                    <div>
+                        <i class="fas fa-star"></i>
+                        <span>
+                            <a href="https://www.imdb.com/title/tt2741602/" target="_blank">8.0/10 (IMDb)</a>
+                        </span>
+                    </div>
+                    <div>
+                        <i class="fas fa-tv"></i>
+                        <span>Crime, Drama, Mystery</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Release: September 23, 2013</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <section>
-        <h2>Episodes</h2>
-        <ul>
-            <li><a href="https://fsdcmo.sbs/e/rnhscgnug6ks" target="_blank">Episode 1</a></li>
-            <li><a href="https://fsdcmo.sbs/e/v7zt24qc92s3" target="_blank">Episode 2</a></li>
-            <li><a href="https://fsdcmo.sbs/e/6b1slavjd2h7" target="_blank">Episode 3</a></li>
-            <li><a href="https://fsdcmo.sbs/e/shh0xwvkp71e" target="_blank">Episode 4</a></li>
-            <li><a href="https://fsdcmo.sbs/e/51ysdnjulg5i" target="_blank">Episode 5</a></li>
-        </ul>
+        <!-- Dynamic heading for seasons/episodes -->
+        <h2 id="sectionHeading">Seasons</h2>
+
+        <!-- Selected season title -->
+        <div id="selectedSeasonTitle" class="selected-season-title"></div>
+
+        <!-- Grid layout for seasons -->
+        <div id="seasonGrid" class="season-grid">
+            <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
+                <h3>Season 1</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season2', 'Season 2')">
+                <h3>Season 2</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season3', 'Season 3')">
+                <h3>Season 3</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season4', 'Season 4')">
+                <h3>Season 4</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season5', 'Season 5')">
+                <h3>Season 5</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season6', 'Season 6')">
+                <h3>Season 6</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season7', 'Season 7')">
+                <h3>Season 7</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season8', 'Season 8')">
+                <h3>Season 8</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season9', 'Season 9')">
+                <h3>Season 9</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season10', 'Season 10')">
+                <h3>Season 10</h3>
+            </div>
+        </div>
+
+        <!-- Grid layout for episodes -->
+        <div id="episodeGrid" class="episode-grid"></div>
+
+        <!-- Back button -->
+        <button id="backButton" class="back-button" onclick="showSeasons()" style="display: none;">
+            <i class="fas fa-arrow-left"></i> Back to Seasons
+        </button>
     </section>
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
+
+    <script>
+        // Server links for Season 1
+        const serverLinks = {
+            season1: {
+                episode1: "https://fsdcmo.sbs/e/rnhscgnug6ks",
+                episode2: "https://fsdcmo.sbs/e/v7zt24qc92s3",
+                episode3: "https://fsdcmo.sbs/e/6b1slavjd2h7",
+                episode4: "https://fsdcmo.sbs/e/shh0xwvkp71e",
+                episode5: "https://fsdcmo.sbs/e/51ysdnjulg5i",
+                episode6: "https://fsdcmo.sbs/e/3ngqo0y163m3",
+                episode7: "https://fsdcmo.sbs/e/a7smfjdioykt",
+                episode8: "https://fsdcmo.sbs/e/4l4fo51bfl1c",
+                episode9: "https://fsdcmo.sbs/e/9y0llqhlhjd0",
+                episode10: "https://fsdcmo.sbs/e/6b3kwe4a3oyy",
+                episode11: "https://fsdcmo.sbs/e/4yv80rj2kcne",
+                episode12: "https://fsdcmo.sbs/e/3qa1jy8hdo97",
+                episode13: "https://fsdcmo.sbs/e/m12nz71tfs59",
+                episode14: "https://fsdcmo.sbs/e/ixcmpljjdfg0",
+                episode15: "https://fsdcmo.sbs/e/ylgs4yc1wvqd",
+                episode16: "https://fsdcmo.sbs/e/4jrk3kopyqy8",
+                episode17: "https://fsdcmo.sbs/e/wx3wc3bcxdmw",
+                episode18: "https://fsdcmo.sbs/e/h8dc9isr4z32",
+                episode19: "https://fsdcmo.sbs/e/lcwiz85ur2th",
+                episode20: "https://fsdcmo.sbs/e/nujhg96i4sr2",
+                episode21: "https://fsdcmo.sbs/e/l04uumh4ry56",
+                episode22: "https://fsdcmo.sbs/e/ndk2ou192399",
+                // Add more episodes as needed
+            },
+            season2: {
+                episode1: "https://fsdcmo.sbs/e/qmmdnl9m0njp",
+                episode2: "https://fsdcmo.sbs/e/8r92pgstnhcg",
+                episode3: "https://fsdcmo.sbs/e/ls2fklayqwa9",
+                episode4: "https://fsdcmo.sbs/e/lt77b07rbxoe",
+                episode5: "https://fsdcmo.sbs/e/fh81g363z5p8",
+                episode6: "https://fsdcmo.sbs/e/tse85uta8sh2",
+                episode7: "https://fsdcmo.sbs/e/v6a5n3xzgom5",
+                episode8: "https://fsdcmo.sbs/e/8rovhe14950b",
+                episode9: "https://fsdcmo.sbs/e/v6s33w7traw2",
+                episode10: "https://fsdcmo.sbs/e/bevc7m2ism2c",
+                episode11: "https://fsdcmo.sbs/e/xm9ssu7wadsx",
+                episode12: "https://fsdcmo.sbs/e/dautd5d01poa",
+                episode13: "https://fsdcmo.sbs/e/y5e0rki98jx2",
+                episode14: "https://fsdcmo.sbs/e/gmm9ybv1y51f",
+                episode15: "https://fsdcmo.sbs/e/214aesrlns8c",
+                episode16: "https://fsdcmo.sbs/e/3tqozvn17v8f",
+                episode17: "https://fsdcmo.sbs/e/smu4d3rapqt0",
+                episode18: "https://fsdcmo.sbs/e/yj294gx0kx80",
+                episode19: "https://fsdcmo.sbs/e/cjbgxuhfercn",
+                episode20: "https://fsdcmo.sbs/e/doyproip4qfn",
+                episode21: "https://fsdcmo.sbs/e/f2vtd61qgvcj",
+                episode22: "https://fsdcmo.sbs/e/fvuwbt06s5lb",
+                // Add more episodes as needed
+            },
+            season3: {
+                episode1: "https://fsdcmo.sbs/e/zoj19vqm3yqn",
+                episode2: "https://fsdcmo.sbs/e/fm5rowqnqh0j",
+                episode3: "https://fsdcmo.sbs/e/lmig2m4xpbor",
+                episode4: "https://fsdcmo.sbs/e/fhqqul2xx6ny",
+                episode5: "https://fsdcmo.sbs/e/ehd0a6y5fhyj",
+                episode6: "https://fsdcmo.sbs/e/0ek8dqn5x8h6",
+                episode7: "https://fsdcmo.sbs/e/5bs07l4zwoct",
+                episode8: "https://fsdcmo.sbs/e/5vlusymn2jdx",
+                episode9: "https://fsdcmo.sbs/e/1oseve2hm6jy",
+                episode10:"https://fsdcmo.sbs/e/m02onwtip2wx",
+                episode11: "https://fsdcmo.sbs/e/8uhdbdf5odh2",
+                episode12: "https://fsdcmo.sbs/e/hqdiz5f9ucko",
+                episode13: "https://fsdcmo.sbs/e/mhern1ws20d5",
+                episode14: "https://fsdcmo.sbs/e/4na4xk71vt3k",
+                episode15: "https://fsdcmo.sbs/e/oani25ari0az",
+                episode16: "https://fsdcmo.sbs/e/c4gao1e8wva5",
+                episode17: "https://fsdcmo.sbs/e/ne2tqp9ducbj",
+                episode18: "https://fsdcmo.sbs/e/0nqxme9ystax",
+                episode19: "https://fsdcmo.sbs/e/bkkitwvms84e",
+                episode20: "https://fsdcmo.sbs/e/odgywprq9muq",
+                episode21: "https://fsdcmo.sbs/e/wk0mwvu9znkb",
+                episode22: "https://fsdcmo.sbs/e/0c8lg5mqz5bt",
+                episode23: "https://fsdcmo.sbs/e/2fl09q7nrwc5",
+                // Add more episodes as needed
+            },
+            season4: {
+                episode1: "https://fsdcmo.sbs/e/61xejef0bw37",
+                episode2: "https://fsdcmo.sbs/e/btkfaeyb2xdg",
+                episode3: "https://fsdcmo.sbs/e/hq6xi25f3ae6",
+                episode4: "https://fsdcmo.sbs/e/ewlwbhbf6y1d",
+                episode5: "https://fsdcmo.sbs/e/z1nxngna8nfv",
+                episode6: "https://fsdcmo.sbs/e/5bdi567ewge1",
+                episode7: "https://fsdcmo.sbs/e/z257okh3yuav",
+                episode8: "https://fsdcmo.sbs/e/k9vuqwkr5w90",
+                episode9: "https://fsdcmo.sbs/e/o7otlxfgem40",
+                episode10: "https://fsdcmo.sbs/e/npce8ewvc0gp",
+                episode11: "https://fsdcmo.sbs/e/7gm864whaond",
+                episode12: "https://fsdcmo.sbs/e/75hl27x4lpyl",
+                episode13: "https://fsdcmo.sbs/e/gsc73g8jn6fw",
+                episode14: "https://fsdcmo.sbs/e/yh5i4xerchq4",
+                episode15: "https://fsdcmo.sbs/e/18sjtpittc05",
+                episode16: "https://fsdcmo.sbs/e/xzf242hvc55b",
+                episode17: "https://fsdcmo.sbs/e/zpypue1h6uf5",
+                episode18: "https://fsdcmo.sbs/e/o5e952l386bk",
+                episode19: "https://fsdcmo.sbs/e/t07ee4ld6yh9",
+                episode20: "https://fsdcmo.sbs/e/172debk89mbu",
+                episode21: "https://fsdcmo.sbs/e/dx741inzhwv3",
+                episode22: "https://fsdcmo.sbs/e/850j405tofhw",
+                // Add more episodes as needed
+            },
+            season5: {
+                episode1: "https://fsdcmo.sbs/e/9iytx1mmug2z",
+                episode2: "https://fsdcmo.sbs/e/s7fu3jecvohm",
+                episode3: "https://fsdcmo.sbs/e/e77k1qiirb9k",
+                episode4: "https://fsdcmo.sbs/e/hp7gk0aaqkih",
+                episode5: "https://fsdcmo.sbs/e/zcmn8524vg6r",
+                episode6: "https://fsdcmo.sbs/e/o8az9o01cvxk",
+                episode7: "https://fsdcmo.sbs/e/0bvu9w375eq9",
+                episode8: "https://fsdcmo.sbs/e/xnri2xitbjvy",
+                episode9: "https://fsdcmo.sbs/e/1wav7uq4cirh",
+                episode10: "https://fsdcmo.sbs/e/oc48zz84lg83",
+                episode11: "https://fsdcmo.sbs/e/1sxxetbzzuch",
+                episode12: "https://fsdcmo.sbs/e/z6sf7tr7600g",
+                episode13: "https://fsdcmo.sbs/e/amzeeawsszhn",
+                episode14: "https://fsdcmo.sbs/e/hlmoqayasctu",
+                episode15: "https://fsdcmo.sbs/e/7rzarh2h40hq",
+                episode16: "https://fsdcmo.sbs/e/vhplrg1laufi",
+                episode17: "https://fsdcmo.sbs/e/uzpqd7xyutox",
+                episode18: "https://fsdcmo.sbs/e/b23gd1rerinv",
+                episode19: "https://fsdcmo.sbs/e/giagr6xthxyg",
+                episode20: "https://fsdcmo.sbs/e/e2ejh1439u7w",
+                episode21: "https://fsdcmo.sbs/e/4poe0szioev2",
+                episode22: "https://fsdcmo.sbs/e/nh7dbnrxb8z9",
+                // Add more episodes as needed
+            },
+            season6: {
+                episode1: "https://fsdcmo.sbs/e/80uh92nvjo2y",
+                episode2: "https://fsdcmo.sbs/e/fm7o1m92oj2h",
+                episode3: "https://fsdcmo.sbs/e/t1bga71rgxmu",
+                episode4: "https://fsdcmo.sbs/e/y6xf6phh04np",
+                episode5: "https://fsdcmo.sbs/e/m7uiwq66bcu1",
+                episode6: "https://fsdcmo.sbs/e/ocvlqwkkkwuo",
+                episode7: "https://fsdcmo.sbs/e/lo88ul5milpx",
+                episode8: "https://fsdcmo.sbs/e/cv7yg9q6uvxn",
+                episode9: "https://fsdcmo.sbs/e/xnwg5ei5iiew",
+                episode10: "https://fsdcmo.sbs/e/yl2knhxwrzyr",
+                episode11: "https://fsdcmo.sbs/e/0c2q7oxvm1x5",
+                episode12: "https://fsdcmo.sbs/e/u59xsthlq9mf",
+                episode13: "https://fsdcmo.sbs/e/64bmmgpkub6o",
+                episode14: "https://fsdcmo.sbs/e/3zsges77gwzq",
+                episode15: "https://fsdcmo.sbs/e/jbga4ckrla7y",
+                episode16: "https://fsdcmo.sbs/e/drq51txbbwx0",
+                episode17: "https://fsdcmo.sbs/e/ztqi332y2hwx",
+                episode18: "https://fsdcmo.sbs/e/mjjlmgootwud",
+                episode19: "https://fsdcmo.sbs/e/17chmn8os4ks",
+                episode20: "https://fsdcmo.sbs/e/cgimw5jy4sek",
+                episode21: "https://fsdcmo.sbs/e/ll9sj3gacye5",
+                episode22: "https://fsdcmo.sbs/e/ww4unk61mt9m",
+                // Add more episodes as needed
+            },
+            season7: {
+                episode1: "https://fsdcmo.sbs/e/v5pm03pikv8v",
+                episode2: "https://fsdcmo.sbs/e/nt87ped4cnz7",
+                episode3: "https://fsdcmo.sbs/e/mgc59mlfpnom",
+                episode4: "https://fsdcmo.sbs/e/ts51sjc4zcin",
+                episode5: "https://fsdcmo.sbs/e/xtkqwmu1ludn",
+                episode6: "https://fsdcmo.sbs/e/vrqjii7lpjrx",
+                episode7: "https://fsdcmo.sbs/e/34d593i7r1ag",
+                episode8: "https://fsdcmo.sbs/e/avyimedmy6na",
+                episode9: "https://fsdcmo.sbs/e/bfqziv2pa2c6",
+                episode10: "https://fsdcmo.sbs/e/3yo2eqaaxzvj",
+                episode11: "https://fsdcmo.sbs/e/5ujeathzzugy",
+                episode12: "https://fsdcmo.sbs/e/udxmsva4e89f",
+                episode13: "https://fsdcmo.sbs/e/4k2g3czyurah",
+                episode14: "https://fsdcmo.sbs/e/dppgqxzsuiw5",
+                episode15: "https://fsdcmo.sbs/e/dij7d2mzhyuf",
+                episode16: "https://fsdcmo.sbs/e/6lqge53m7sad",
+                episode17: "https://fsdcmo.sbs/e/507kqz07ipbk",
+                episode18: "https://fsdcmo.sbs/e/hhh6brexdded",
+                episode19: "https://fsdcmo.sbs/e/e8e3ibtg5ihs",
+                // Add more episodes as needed
+            },
+            season8: {
+                episode1: "https://fsdcmo.sbs/e/qp5lifnmdjfs",
+                episode2: "https://fsdcmo.sbs/e/juajn8bdblxc",
+                episode3: "https://fsdcmo.sbs/e/xxzd6vc0l6js",
+                episode4: "https://fsdcmo.sbs/e/qmkg3k422mol",
+                episode5: "https://fsdcmo.sbs/e/m1i1mi2kok9k",
+                episode6: "https://fsdcmo.sbs/e/zjrzo95lblpw",
+                episode7: "https://fsdcmo.sbs/e/kl4qwza8yluo",
+                episode8: "https://fsdcmo.sbs/e/d8pxhfi73rtw",
+                episode9: "https://fsdcmo.sbs/e/l8cexq8nn1x7",
+                episode10: "https://fsdcmo.sbs/e/6dden823kxa3",
+                episode11: "https://fsdcmo.sbs/e/axx2brp39vxa",
+                episode12: "https://fsdcmo.sbs/e/78ubntg4f9e2",
+                episode13: "https://fsdcmo.sbs/e/ki1lyh7miisc",
+                episode14: "https://fsdcmo.sbs/e/zq1ks90vmn23",
+                episode15: "https://fsdcmo.sbs/e/a26smltv7z66",
+                episode16: "https://fsdcmo.sbs/e/yqsm5v1vffh7",
+                episode17: "https://fsdcmo.sbs/e/xv3a6pa8tzvw",
+                episode18: "https://fsdcmo.sbs/e/4gmjhl1chz28",
+                episode19: "https://fsdcmo.sbs/e/drdsk3r6zsap",
+                episode20: "https://fsdcmo.sbs/e/ng8y629xp27h",
+                episode21: "https://fsdcmo.sbs/e/juukg5d52nny",
+                episode22: "https://fsdcmo.sbs/e/2zo5o36cbkfl",
+                // Add more episodes as needed
+            },
+            season9: {
+                episode1: "https://fsdcmo.sbs/e/7d11i9b1u10z",
+                episode2: "https://fsdcmo.sbs/e/zj7h623obmzm",
+                episode3: "https://fsdcmo.sbs/e/8c5yi2l6lri8",
+                episode4: "https://fsdcmo.sbs/e/fc23u132u65l",
+                episode5: "https://fsdcmo.sbs/e/7byltnn2xogb",
+                episode6: "https://fsdcmo.sbs/e/c6lm5u6zsrve",
+                episode7: "https://fsdcmo.sbs/e/hdy33ly5qy1f",
+                episode8: "https://fsdcmo.sbs/e/yejvgojf3gih",
+                episode9: "https://fsdcmo.sbs/e/fq5jlvk20wao",
+                episode10: "https://fsdcmo.sbs/e/s4vmamonquq5",
+                episode11: "https://fsdcmo.sbs/e/yuc8ct7sk2ed",
+                episode12: "https://fsdcmo.sbs/e/q4k75bksl5r4",
+                episode13: "https://fsdcmo.sbs/e/jt65f1zwqdxw",
+                episode14: "https://fsdcmo.sbs/e/km9wslams1fr",
+                episode15: "https://fsdcmo.sbs/e/k9em0gfqqmb6",
+                episode16: "https://fsdcmo.sbs/e/fadst4yjl6sl",
+                episode17: "https://fsdcmo.sbs/e/xn3dfgo6axlb",
+                episode18: "https://fsdcmo.sbs/e/rhzgezfnec5l",
+                episode19: "https://fsdcmo.sbs/e/w8c2wf3xhn17",
+                episode20: "https://fsdcmo.sbs/e/ava7xhr63qng",
+                episode21: "https://fsdcmo.sbs/e/j9ji8i299a2g",
+                episode22: "https://fsdcmo.sbs/e/kjunqs70zvap",
+                // Add more episodes as needed
+            },
+            season10: {
+                episode1: "https://fsdcmo.sbs/e/uvqz3t16lbtg",
+                episode2: "https://fsdcmo.sbs/e/wrypdlmbojh0",
+                episode3: "https://fsdcmo.sbs/e/8moihlbjp63i",
+                episode4: "https://fsdcmo.sbs/e/25tfdw7hgc2k",
+                episode5: "https://fsdcmo.sbs/e/8in2qindgkn6",
+                episode6: "https://fsdcmo.sbs/e/pfgmunqcf966",
+                episode7: "https://fsdcmo.sbs/e/b4m56ndv6435",
+                episode8: "https://fsdcmo.sbs/e/iybrchym5lou",
+                episode9: "https://fsdcmo.sbs/e/28z3bt8fs50c",
+                episode10: "https://fsdcmo.sbs/e/50mycc46442r",
+                episode11: "https://fsdcmo.sbs/e/tuu2se3sysev",
+                episode12: "https://fsdcmo.sbs/e/c40rncl3k3d6",
+                episode13: "https://fsdcmo.sbs/e/ocr019bf8jvk",
+                episode14: "https://fsdcmo.sbs/e/06jdc820jdix",
+                episode15: "https://fsdcmo.sbs/e/9cj9ka8nweoo",
+                episode16: "https://fsdcmo.sbs/e/y8x1sddkleag",
+                episode17: "https://fsdcmo.sbs/e/d0nc32ni7osi",
+                episode18: "https://fsdcmo.sbs/e/5kkt25tnjfwo",
+                episode19: "https://fsdcmo.sbs/e/hnwy70pz3jvv",
+                episode20: "https://fsdcmo.sbs/e/pl6gfhnkwdii",
+                episode21: "https://fsdcmo.sbs/e/swoll7a4t77i",
+                episode22: "https://fsdcmo.sbs/e/r7xz44elxuoh",
+                // Add more episodes as needed
+            },
+            // Add more seasons as needed
+        };
+
+        // Function to show episodes for a selected season
+        function showEpisodes(season, seasonName) {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Hide season grid and show episode grid
+            seasonGrid.style.display = "none";
+            episodeGrid.style.display = "grid";
+            selectedSeasonTitle.style.display = "block";
+            backButton.style.display = "flex";
+
+            // Update the section heading
+            sectionHeading.textContent = "Episodes";
+
+            // Set the selected season title
+            selectedSeasonTitle.textContent = seasonName;
+
+            // Clear existing episodes
+            episodeGrid.innerHTML = "";
+
+            // Add episodes for the selected season
+            if (season) {
+                for (let i = 1; i <= 23; i++) {
+                    const episodeKey = `episode${i}`;
+                    const episodeLink = serverLinks[season][episodeKey];
+
+                    if (episodeLink) {
+                        const episodeCard = document.createElement("div");
+                        episodeCard.className = "episode-card";
+                        episodeCard.innerHTML = `<a href="${episodeLink}" target="_blank">Episode ${i}</a>`;
+                        episodeGrid.appendChild(episodeCard);
+                    }
+                }
+            }
+        }
+
+        // Function to show seasons again
+        function showSeasons() {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Show season grid and hide episode grid
+            seasonGrid.style.display = "grid";
+            episodeGrid.style.display = "none";
+            selectedSeasonTitle.style.display = "none";
+            backButton.style.display = "none";
+
+            // Update the section heading
+            sectionHeading.textContent = "Seasons";
+        }
+    </script>
 </body>
 </html>
