@@ -219,3 +219,34 @@ footer a:hover {
 .additional-info a:hover {
     color: #e50914;
 }
+/* Default styles for larger screens */
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.poster img {
+    max-width: 100%;
+    height: auto;
+}
+
+.description {
+    flex: 1;
+}
+
+/* Responsive styles for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column; /* Stack poster and description vertically */
+        align-items: center; /* Center-align items */
+    }
+
+    .poster {
+        margin-bottom: 20px; /* Add space between poster and description */
+    }
+
+    .description {
+        text-align: center; /* Center-align text for better readability */
+    }
+}
