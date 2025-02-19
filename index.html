@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Movie</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <style>
         /* General Styles */
         body {
@@ -22,7 +24,7 @@
         header {
             background-color: #e50914; /* Netflix-like red */
             color: #fff;
-            padding: 30px;
+            padding: 15px 20px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative; /* For positioning the search bar */
@@ -30,135 +32,253 @@
 
         h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 600;
             letter-spacing: 1px;
-            padding-bottom: 20px;
         }
 
-        nav {
-    padding: 10px 20px;
-    display: flex;
-    justify-content: flex-end; /* Align search bar to the right */
-    align-items: center;
+        /* Combined Search and Filter Bar */
+        .search-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background-color: #262626;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            position: relative;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #333;
+            padding: 8px 12px;
+            border-radius: 25px;
+            flex: 1;
+        }
+
+        .search-bar input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+            background-color: transparent;
+            color: #fff;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #888;
+        }
+
+        .search-bar .clear-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            padding-right: 30px;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar .clear-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #e50914;
+        }
+
+        .search-bar input:not(:placeholder-shown) + .clear-icon {
+            display: flex; /* Show clear icon when input has text */
+        }
+
+        .material-symbols-outlined {
+            cursor: pointer;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .material-symbols-outlined:hover {
+            transform: scale(1.1);
+        }
+
+        /* Suggestions Dropdown */
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #262626;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background-color: #e50914;
+        }
+        * {
+    margin: 0;
+    padding: 0; /* Fixed padding value (100 is invalid) */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box; /* Ensures padding and border are included in element dimensions */
 }
 
-/* Search Container */
-.search-container {
+.container {
     display: flex;
-    align-items: center;
-    position: relative;
+    font-size: 14px;
+    height: 10vh;
 }
 
-/* Search Toggle Icon */
-.material-symbols-outlined {
-    background: none;
-    border: none;
+.navbar {
+    margin: auto;
+    padding: 0.5rem 1.5rem;
+    background: #333;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure navbar takes full width */
+    max-width: 1200px; /* Limit maximum width for larger screens */
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    list-style: none;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
     color: #fff;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    position: absolute;
-    right: 0; /* Position the icon to the right */
-    z-index: 1; /* Ensure the icon is above the search bar */
 }
 
-.material-symbols-outlined svg {
-    width: 24px;
-    height: 24px;
-    fill: #e50914; /* Netflix-like red */
+/* Style for the select dropdown container */
+.nav-link.services select {
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none; /* Remove default arrow for Safari */
+    -moz-appearance: none; /* Remove default arrow for Firefox */
+    background-color: transparent; /* Match the background */
+    border: none; /* Remove border */
+    color: #fff; /* Text color */
+    font-size: inherit; /* Inherit font size */
+    font-family: inherit; /* Inherit font family */
+    padding: 0.5rem 2rem 0.5rem 1rem; /* Add padding */
+    cursor: pointer; /* Show pointer cursor */
+    outline: none; /* Remove focus outline */
+    border-radius: 0.5rem; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.material-symbols-outlined:hover {
-    transform: scale(1.1);
+/* Style for the select dropdown arrow */
+.nav-link.services select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center; /* Position the arrow */
+    background-size: 12px; /* Size of the arrow */
 }
 
-/* Search Bar */
-.search-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #262626;
-    padding: 8px 12px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease;
-    position: absolute;
-    right: 0;
+/* Hover effect for the select dropdown */
+.nav-link.services select:hover {
+    background-color: #e50914; /* Red hover effect */
+    color: #fff; /* White text on hover */
 }
 
-.search-container:hover .search-bar {
-    width: 250px; /* Expanded width */
-    opacity: 1;
-    visibility: visible;
+/* Focus effect for the select dropdown */
+.nav-link.services select:focus {
+    background-color: rgba(255, 255, 255, 0.2); /* Light focus effect */
 }
 
-.search-bar input {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    width: 100%;
-    background-color: transparent;
-    color: #fff;
-    outline: none;
+/* Style for the options in the dropdown */
+.nav-link.services select option {
+    background-color: #444; /* Dark background for options */
+    color: #fff; /* White text for options */
+    padding: 0.5rem 1rem; /* Add padding */
+    font-size: 14px; /* Match font size */
 }
 
-.search-bar input::placeholder {
-    color: #888;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem; /* Reduce padding for smaller screens */
+    }
+
+    .nav-links {
+        gap: 1rem; /* Reduce gap between links */
+    }
+
+    .nav-link {
+        padding: 0.5rem 0.75rem; /* Adjust padding for smaller screens */
+    }
+
+    .nav-link.services select {
+        padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Adjust padding for smaller screens */
+    }
 }
 
-.search-bar .clear-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    padding-right: 30px;
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
+@media (max-width: 480px) {
+    .navbar {
+        border-radius: 0; /* Remove border-radius for full-width navbar */
+    }
+
+    .nav-links {
+        flex-direction: column; /* Stack links vertically */
+        gap: 0.5rem; /* Reduce gap further */
+    }
+
+    .nav-link {
+        width: 100%; /* Full width for links */
+        text-align: center; /* Center-align text */
+    }
+
+    .nav-link.services select {
+        width: 100%; /* Full width for dropdowns */
+        text-align: center; /* Center-align text */
+    }
+}
+@media (max-width: 768px) {
+    .search-filter-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .filter-dropdown {
+        width: 100%;
+    }
 }
 
-.search-bar .clear-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: #e50914;
-}
 
-.search-bar input:not(:placeholder-shown) + .clear-icon {
-    display: flex; /* Show clear icon when input has text */
-}
-
-/* Suggestions Dropdown */
-.suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #262626;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 10;
-    display: none;
-}
-
-.suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.suggestion-item:hover {
-    background-color: #444;
-}
 
         /* Movie Container */
         .movie-container {
@@ -226,18 +346,18 @@
 
         /* Responsive Layout */
         @media (max-width: 768px) {
-            .movie-container {
+            .search-filter-bar {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
             }
 
-            section {
-                width: 80%;
-                max-width: 300px;
+            .filter-bar {
+                flex-direction: column;
+                gap: 10px;
             }
 
             .search-bar input {
-                width: 150px; /* Smaller width for mobile */
+                width: 100%;
             }
         }
     </style>
@@ -249,14 +369,15 @@
 <body>
     <header>
         <h1>Next Movie</h1>
-        <!-- Navigation Bar with Search -->
+    </header>
+    <div class="search-filter-bar">
         <div class="search-container">
-            <!-- Search Bar -->
             <div class="search-bar">
                 <input 
                     type="text" 
                     id="searchInput" 
                     placeholder="Search for a movie..." 
+                    oninput="searchMovie()"
                 >
                 <button class="clear-icon" onclick="clearSearch()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -265,47 +386,82 @@
                 </button>
                 <div id="suggestions" class="suggestions"></div>
             </div>
-        
-            <!-- Search Icon -->
-            
             <span class="material-symbols-outlined" onclick="toggleSearch()">
                 search
-                </span>
+            </span>
         </div>
-    </header>
-    <!-- Movie Container -->
+        <div class="container">
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="nav-link services">
+                        <select id="genre">
+                            <option value="all">All Genres</option>
+                            <option value="drama">Drama</option>
+                            <option value="action">Action</option>
+                            <option value="horror">Horror</option>
+                            <option value="crime">Crime</option>
+                            <option value="comedy">Comedy</option>
+                        </select>
+                    </li>
+                    <li class="nav-link services">
+                        <select id="year">
+                            <option value="all">All Years</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </li>
+                    <li class="nav-link services">
+                        <select id="rating">
+                            <option value="all">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                        </select>
+                    </li>
+                    <li class="nav-link services">
+                        <select id="language">
+                            <option value="all">All Languages</option>
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
     <div class="movie-container">
-        <section>
+        <section data-genre="action crime" data-year="2023" data-rating="4" data-language="english">
             <a href="details1.html">
                 <img src="717eUMztmbL.webp" alt="Movie Poster">
             </a>
             <figcaption>The Blacklist</figcaption>
         </section>
-        <section>
+        <section data-genre="drama action" data-year="2022" data-rating="5" data-language="hindi">
             <a href="details2.html">
                 <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
             </a>
             <figcaption>Çukur</figcaption>
         </section>
-        <section>
+        <section data-genre="comedy" data-year="2021" data-rating="3" data-language="spanish">
             <a href="details3.html">
                 <img src="81u+55risFL.webp" alt="Movie Poster">
             </a>
             <figcaption>Lovely Runner</figcaption>
         </section>
-        <section>
+        <section data-genre="action" data-year="2023" data-rating="4" data-language="english">
             <a href="details4.html">
                 <img src="a1820276624908f3d45de4abbaf24317.webp" alt="Movie Poster">
             </a>
             <figcaption>Rocky 4</figcaption>
         </section>
-        <section>
+        <section data-genre="drama" data-year="2022" data-rating="5" data-language="hindi">
             <a href="home.html">
                 <img src="c9c4b0bbd7f30d1cec2dea10942ff8e9.webp" alt="Movie Poster">
             </a>
             <figcaption>The Penthouse</figcaption>
         </section>
-        <section>
+        <section data-genre="comedy" data-year="2021" data-rating="3" data-language="spanish">
             <a href="details5.html">
                 <img src="81YsWAgE2eL.webp" alt="Movie Poster">
             </a>
@@ -316,93 +472,161 @@
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
-
-    <!-- JavaScript for Search Functionality -->
     <script>
-    
-    // Toggle Search Bar
-    function toggleSearch() {
-        const searchBar = document.querySelector('.search-bar');
-        searchBar.classList.toggle('active');
-    }
+        function applyFilters() {
+            const genre = document.getElementById('genre').value;
+            const year = document.getElementById('year').value;
+            const rating = document.getElementById('rating').value;
+            const language = document.getElementById('language').value;
 
-    // Clear Search Input
-    function clearSearch() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.value = '';
-        searchInput.focus();
-        document.getElementById('suggestions').style.display = 'none';
-        searchMovie(); // Reset the movie list
-    }
+            const movieSections = document.querySelectorAll('.movie-container section');
+            movieSections.forEach(section => {
+                const movieGenres = section.getAttribute('data-genre').split(' '); // Split genres into an array
+                const movieYear = section.getAttribute('data-year');
+                const movieRating = section.getAttribute('data-rating');
+                const movieLanguage = section.getAttribute('data-language');
 
-    // Search Functionality
-    function searchMovie() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const movieSections = document.querySelectorAll('.movie-container section');
+                // Check if any of the movie's genres match the selected genre
+                const genreMatch = genre === 'all' || movieGenres.includes(genre);
+                const yearMatch = year === 'all' || movieYear === year;
+                const ratingMatch = rating === 'all' || movieRating >= rating;
+                const languageMatch = language === 'all' || movieLanguage === language;
 
-        movieSections.forEach(section => {
-            const movieTitle = section.querySelector('figcaption').textContent.toLowerCase();
-            if (movieTitle.includes(searchTerm)) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
-        });
-    }
-
-    // Suggestions (using Fuse.js)
-    const movies = [
-        "The Blacklist",
-        "Çukur",
-        "Lovely Runner",
-        "Rocky 4",
-        "The Penthouse",
-        "Pompeii"
-    ];
-
-    const fuse = new Fuse(movies, {
-        includeScore: true,
-        threshold: 0.3,
-    });
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const query = e.target.value.trim();
-        const suggestionsContainer = document.getElementById('suggestions');
-
-        if (query === '') {
-            suggestionsContainer.style.display = 'none';
-            return;
-        }
-
-        const results = fuse.search(query);
-        showSuggestions(results);
-    });
-
-    function showSuggestions(results) {
-        const suggestionsContainer = document.getElementById('suggestions');
-        suggestionsContainer.innerHTML = '';
-
-        if (results.length === 0) {
-            suggestionsContainer.innerHTML = "<div class='suggestion-item'>No matches found</div>";
-            suggestionsContainer.style.display = 'block';
-            return;
-        }
-
-        results.forEach(result => {
-            const suggestionItem = document.createElement('div');
-            suggestionItem.className = 'suggestion-item';
-            suggestionItem.textContent = result.item;
-            suggestionItem.addEventListener('click', () => {
-                document.getElementById('searchInput').value = result.item;
-                suggestionsContainer.style.display = 'none';
-                searchMovie();
-            });
-            suggestionsContainer.appendChild(suggestionItem);
-        });
+                if (genreMatch && yearMatch && ratingMatch && languageMatch) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
         
-        suggestionsContainer.style.display = 'block';
-    }
+            });
+        }
+        function toggleSearch() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.classList.toggle('active');
+        }
 
+        // Clear Search Input
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            searchInput.focus();
+            document.getElementById('suggestions').style.display = 'none';
+            searchMovie(); // Reset the movie list
+        }
+
+        // Search Functionality
+        function searchMovie() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const movieSections = document.querySelectorAll('.movie-container section');
+
+            movieSections.forEach(section => {
+                const movieTitle = section.querySelector('figcaption').textContent.toLowerCase();
+                if (movieTitle.includes(searchTerm)) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Suggestions (using Fuse.js)
+        const movies = [
+            "The Blacklist",
+            "Çukur",
+            "Lovely Runner",
+            "Rocky 4",
+            "The Penthouse",
+            "Pompeii"
+        ];
+
+        const fuse = new Fuse(movies, {
+            includeScore: true,
+            threshold: 0.3,
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            const suggestionsContainer = document.getElementById('suggestions');
+
+            if (query === '') {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+
+            const results = fuse.search(query);
+            showSuggestions(results);
+        });
+
+        function showSuggestions(results) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+
+            if (results.length === 0) {
+                suggestionsContainer.innerHTML = "<div class='suggestion-item'>No matches found</div>";
+                suggestionsContainer.style.display = 'block';
+                return;
+            }
+
+            results.forEach(result => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item';
+                suggestionItem.textContent = result.item;
+                suggestionItem.addEventListener('click', () => {
+                    document.getElementById('searchInput').value = result.item;
+                    suggestionsContainer.style.display = 'none';
+                    searchMovie();
+                });
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+
+            suggestionsContainer.style.display = 'block';
+        }
+
+        // Real-Time Filter Functionality
+        function applyFilters() {
+            const genre = document.getElementById('genre').value;
+            const year = document.getElementById('year').value;
+            const rating = document.getElementById('rating').value;
+            const language = document.getElementById('language').value;
+
+            const movieSections = document.querySelectorAll('.movie-container section');
+            movieSections.forEach(section => {
+                const movieGenres = section.getAttribute('data-genre').split(' '); // Split genres into an array
+                const movieYear = section.getAttribute('data-year');
+                const movieRating = section.getAttribute('data-rating');
+                const movieLanguage = section.getAttribute('data-language');
+
+                // Check if any of the movie's genres match the selected genre
+                const genreMatch = genre === 'all' || movieGenres.includes(genre);
+                const yearMatch = year === 'all' || movieYear === year;
+                const ratingMatch = rating === 'all' || movieRating >= rating;
+                const languageMatch = language === 'all' || movieLanguage === language;
+
+                if (genreMatch && yearMatch && ratingMatch && languageMatch) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listeners to dropdowns for real-time filtering
+        document.getElementById('genre').addEventListener('change', applyFilters);
+        document.getElementById('year').addEventListener('change', applyFilters);
+        document.getElementById('rating').addEventListener('change', applyFilters);
+        document.getElementById('language').addEventListener('change', applyFilters);
+
+        // Initial filter application
+        applyFilters();
+
+        // Add event listeners to dropdowns for real-time filtering
+        document.getElementById('genre').addEventListener('change', applyFilters);
+        document.getElementById('year').addEventListener('change', applyFilters);
+        document.getElementById('rating').addEventListener('change', applyFilters);
+        document.getElementById('language').addEventListener('change', applyFilters);
+
+        // Initial filter application
+        applyFilters();
     </script>
 </body>
 </html>
