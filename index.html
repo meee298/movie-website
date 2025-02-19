@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         /* General Styles */
         body {
@@ -63,7 +64,7 @@
             align-items: center;
             gap: 10px;
             background-color: #333;
-            padding: 8px 12px;
+            padding: 8px  12px;
             border-radius: 25px;
             flex: 1;
         }
@@ -78,6 +79,22 @@
             color: #fff;
             outline: none;
         }
+        .filter-dropdown {
+    padding: 6px 10px; /* Reduced padding */
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    font-size: 0.9rem; /* Slightly smaller font */
+    cursor: pointer;
+    outline: none;
+    min-width: 100px; /* Ensure dropdowns have a minimum width */
+}
+
+.filter-dropdown:hover {
+    background-color: #555;
+}
+
 
         .search-bar input::placeholder {
             color: #888;
@@ -88,7 +105,7 @@
             border: none;
             cursor: pointer;
             color: #fff;
-            padding-right: 30px;
+            padding-right: 8px;
             display: none; /* Hidden by default */
             align-items: center;
             justify-content: center;
@@ -104,40 +121,57 @@
             display: flex; /* Show clear icon when input has text */
         }
 
-        .material-symbols-outlined {
-            cursor: pointer;
-            color: #fff;
-            transition: transform 0.3s ease;
-        }
+        .material-symbols-outlined, .material-icons {
+    font-family: 'Material Icons' !important; /* For Material Icons */
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Adjust size as needed */
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased; /* Smooth rendering */
+    -moz-osx-font-smoothing: grayscale;
+}
+        /* Toggle Button for Filters */
+.filter-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #444;
+}
 
-        .material-symbols-outlined:hover {
-            transform: scale(1.1);
-        }
+.filter-toggle:hover {
+    background-color: #555;
+}
 
-        /* Suggestions Dropdown */
-        .suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #262626;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
-        }
+/* Hide Filters on Small Screens by Default */
+@media (max-width: 768px) {
+    .filter-container {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-top: 10px;
+    }
 
-        .suggestion-item {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .filter-toggle {
+        display: block; /* Show toggle button on small screens */
+    }
 
-        .suggestion-item:hover {
-            background-color: #e50914;
-        }
+    /* Show Filters When Toggled */
+    .filter-container.visible {
+        display: flex;
+    }
+}
+
         * {
     margin: 0;
     padding: 0; /* Fixed padding value (100 is invalid) */
@@ -265,7 +299,7 @@ a {
 @media (max-width: 768px) {
     .search-filter-bar {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
     .filter-container {
@@ -385,48 +419,40 @@ a {
                     </svg>
                 </button>
             </div>
-            <span class="material-symbols-outlined" onclick="toggleSearch()">
-                search
-            </span>
-            <div class="container">
-                <nav class="navbar">
-                    <ul class="nav-links">
-                        <li class="nav-link services">
-                            <select id="genre">
-                                <option value="all">All Genres</option>
-                                <option value="drama">Drama</option>
-                                <option value="action">Action</option>
-                                <option value="horror">Horror</option>
-                                <option value="crime">Crime</option>
-                                <option value="comedy">Comedy</option>
-                            </select>
-                        </li>
-                        <li class="nav-link services">
-                            <select id="year">
-                                <option value="all">All Years</option>
-                                <option value="2025">2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                            </select>
-                        </li>
-                        <li class="nav-link services">
-                            <select id="rating">
-                                <option value="all">All Ratings</option>
-                                <option value="5">5 Stars</option>
-                                <option value="4">4 Stars</option>
-                                <option value="3">3 Stars</option>
-                            </select>
-                        </li>
-                        <li class="nav-link services">
-                            <select id="language">
-                                <option value="all">All Languages</option>
-                                <option value="en">English</option>
-                                <option value="es">Spanish</option>
-                            </select>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        </div>
+    
+        <!-- Toggle Button for Filters -->
+        <button class="filter-toggle" onclick="toggleFilters()">
+            <span class="material-symbols-outlined">filter_list</span>
+        </button>
+    
+        <!-- Filter Dropdowns -->
+        <div class="filter-container" id="filterContainer">
+            <select id="genre" class="filter-dropdown">
+                <option value="all">All Genres</option>
+                <option value="drama">Drama</option>
+                <option value="action">Action</option>
+                <option value="horror">Horror</option>
+                <option value="crime">Crime</option>
+                <option value="comedy">Comedy</option>
+            </select>
+            <select id="year" class="filter-dropdown">
+                <option value="all">All Years</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+            </select>
+            <select id="rating" class="filter-dropdown">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+            </select>
+            <select id="language" class="filter-dropdown">
+                <option value="all">All Languages</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+            </select>
         </div>
     </div>
     <div class="movie-container">
@@ -579,6 +605,10 @@ a {
             });
 
             suggestionsContainer.style.display = 'block';
+        }
+        function toggleFilters() {
+            const filterContainer = document.getElementById('filterContainer');
+            filterContainer.classList.toggle('visible');
         }
 
         // Real-Time Filter Functionality
