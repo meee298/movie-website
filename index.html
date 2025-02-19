@@ -394,6 +394,21 @@ a {
                 width: 100%;
             }
         }
+        @media (max-width: 768px) {
+            .movie-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .search-bar input {
+                width: 150px; /* Smaller width for mobile */
+            }
+        }
     </style>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -435,6 +450,7 @@ a {
                 <option value="horror">Horror</option>
                 <option value="crime">Crime</option>
                 <option value="comedy">Comedy</option>
+                <option value="romantic">Romantic</option>
             </select>
             <select id="year" class="filter-dropdown">
                 <option value="all">All Years</option>
@@ -451,24 +467,25 @@ a {
             <select id="language" class="filter-dropdown">
                 <option value="all">All Languages</option>
                 <option value="en">English</option>
-                <option value="es">Spanish</option>
+                <option value="tk">Turkish</option>
+                <option value="kr">Korean</option>
             </select>
         </div>
     </div>
     <div class="movie-container">
-        <section data-genre="action crime" data-year="2023" data-rating="4" data-language="english">
+        <section data-genre="action crime" data-year="2023" data-rating="4" data-language="en">
             <a href="details1.html">
                 <img src="717eUMztmbL.webp" alt="Movie Poster">
             </a>
             <figcaption>The Blacklist</figcaption>
         </section>
-        <section data-genre="drama action" data-year="2022" data-rating="5" data-language="hindi">
+        <section data-genre="drama action" data-year="2022" data-rating="5" data-language="tk">
             <a href="details2.html">
                 <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
             </a>
             <figcaption>Çukur</figcaption>
         </section>
-        <section data-genre="comedy" data-year="2021" data-rating="3" data-language="spanish">
+        <section data-genre="comedy romantic drama" data-year="2021" data-rating="3" data-language="kr">
             <a href="details3.html">
                 <img src="81u+55risFL.webp" alt="Movie Poster">
             </a>
