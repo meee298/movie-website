@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -24,17 +25,109 @@
         </div>
     </section>
     <section>
-        <h2>Episodes</h2>
-        <ul>
-            <li><a href="https://fsdcmo.sbs/e/kg1gxn82hkgs" target="_blank">Episode 1</a></li>
-            <li><a href="https://fsdcmo.sbs/e/wcgg17qquxbg" target="_blank">Episode 2</a></li>
-            <li><a href="https://filemoon.sx/e/bx6gt0sd4ctq" target="_blank">Episode 3</a></li>
-            <li><a href="https://fsdcmo.sbs/e/w0dxck7y7r04" target="_blank">Episode 4</a></li>
-            <li><a href="https://fsdcmo.sbs/e/wt0rglgiypbh" target="_blank">Episode 5</a></li>
-        </ul>
+        <!-- Dynamic heading for seasons/episodes -->
+        <h2 id="sectionHeading">Seasons</h2>
+
+        <!-- Selected season title -->
+        <div id="selectedSeasonTitle" class="selected-season-title"></div>
+
+        <!-- Grid layout for seasons -->
+        <div id="seasonGrid" class="season-grid">
+            <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
+                <h3>Season 1</h3>
+            </div>
+        </div>
+
+        <!-- Grid layout for episodes -->
+        <div id="episodeGrid" class="episode-grid"></div>
+
+        <!-- Back button -->
+        <button id="backButton" class="back-button" onclick="showSeasons()" style="display: none;">
+            <i class="fas fa-arrow-left"></i> Back to Seasons
+        </button>
     </section>
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
+    <script>
+        // Server links for Season 1
+        const serverLinks = {
+            season1: {
+                episode1: "https://fsdcmo.sbs/e/kg1gxn82hkgs",
+                episode2: "https://fsdcmo.sbs/e/wcgg17qquxbg",
+                episode3: "https://uqload.to/embed-m35z62oxtmtp.html",
+                episode4: "https://fsdcmo.sbs/e/w0dxck7y7r04",
+                episode5: "https://fsdcmo.sbs/e/wt0rglgiypbh",
+                episode6: "https://fsdcmo.sbs/e/x4y7z4tjpijd",
+                episode7: "https://fsdcmo.sbs/e/41fzrewd2oyr",
+                episode8: "https://fsdcmo.sbs/e/72f2f8qak6k9",
+                episode9: "https://fsdcmo.sbs/e/u60xxba2uay8",
+                episode10: "https://fsdcmo.sbs/e/2urpkjxlvpy8",
+                episode11: "https://fsdcmo.sbs/e/zlra2r152357",
+                episode12: "https://fsdcmo.sbs/e/yb8lqukfo9g7",
+                episode13: "https://fsdcmo.sbs/e/twwde90ctgfu",
+                episode14: "https://fsdcmo.sbs/e/6s4hw9f7p7hy",
+                episode15: "https://fsdcmo.sbs/e/pczreqfp5rot",
+                episode16: "https://fsdcmo.sbs/e/y4svsvuzzm4u",
+                // Add more episodes as needed
+            },
+        };
+        // Function to show episodes for a selected season
+        function showEpisodes(season, seasonName) {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Hide season grid and show episode grid
+            seasonGrid.style.display = "none";
+            episodeGrid.style.display = "grid";
+            selectedSeasonTitle.style.display = "block";
+            backButton.style.display = "flex";
+
+            // Update the section heading
+            sectionHeading.textContent = "Episodes";
+
+            // Set the selected season title
+            selectedSeasonTitle.textContent = seasonName;
+
+            // Clear existing episodes
+            episodeGrid.innerHTML = "";
+
+            // Add episodes for the selected season
+            if (season) {
+                for (let i = 1; i <= 23; i++) {
+                    const episodeKey = `episode${i}`;
+                    const episodeLink = serverLinks[season][episodeKey];
+
+                    if (episodeLink) {
+                        const episodeCard = document.createElement("div");
+                        episodeCard.className = "episode-card";
+                        episodeCard.innerHTML = `<a href="${episodeLink}" target="_blank">Episode ${i}</a>`;
+                        episodeGrid.appendChild(episodeCard);
+                    }
+                }
+            }
+        }
+
+        // Function to show seasons again
+        function showSeasons() {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Show season grid and hide episode grid
+            seasonGrid.style.display = "grid";
+            episodeGrid.style.display = "none";
+            selectedSeasonTitle.style.display = "none";
+            backButton.style.display = "none";
+
+            // Update the section heading
+            sectionHeading.textContent = "Seasons";
+        }
+    </script>
 </body>
 </html>
