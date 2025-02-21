@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Movie</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* General Styles */
         body {
@@ -64,13 +64,12 @@
             align-items: center;
             gap: 10px;
             background-color: #333;
-            padding: 8px  12px;
+            padding: 8px 12px;
             border-radius: 25px;
             flex: 1;
         }
 
         .search-bar input {
-            
             border: none;
             border-radius: 5px;
             font-size: 1rem;
@@ -79,22 +78,22 @@
             color: #fff;
             outline: none;
         }
+
         .filter-dropdown {
-    padding: 6px 10px; /* Reduced padding */
-    border: none;
-    border-radius: 5px;
-    background-color: #444;
-    color: #fff;
-    font-size: 0.9rem; /* Slightly smaller font */
-    cursor: pointer;
-    outline: none;
-    min-width: 100px; /* Ensure dropdowns have a minimum width */
-}
+            padding: 6px 10px; /* Reduced padding */
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            font-size: 0.9rem; /* Slightly smaller font */
+            cursor: pointer;
+            outline: none;
+            min-width: 100px; /* Ensure dropdowns have a minimum width */
+        }
 
-.filter-dropdown:hover {
-    background-color: #555;
-}
-
+        .filter-dropdown:hover {
+            background-color: #555;
+        }
 
         .search-bar input::placeholder {
             color: #888;
@@ -123,207 +122,228 @@
         }
 
         .material-symbols-outlined, .material-icons {
-    font-family: 'Material Icons' !important; /* For Material Icons */
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px; /* Adjust size as needed */
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased; /* Smooth rendering */
-    -moz-osx-font-smoothing: grayscale;
-}
+            font-family: 'Material Icons' !important; /* For Material Icons */
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Adjust size as needed */
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased; /* Smooth rendering */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         /* Toggle Button for Filters */
-.filter-toggle {
-    display: none; /* Hidden by default */
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 5px;
-    background-color: #444;
-}
+        .filter-toggle {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #444;
+        }
 
-.filter-toggle:hover {
-    background-color: #555;
-}
+        .filter-toggle:hover {
+            background-color: #555;
+        }
 
-/* Hide Filters on Small Screens by Default */
-@media (max-width: 768px) {
-    .filter-container {
-        display: none; /* Hidden by default */
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-        margin-top: 10px;
-    }
+        #home {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
 
-    .filter-toggle {
-        display: block; /* Show toggle button on small screens */
-    }
+        #home.hidden {
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* Show Filters When Toggled */
-    .filter-container.visible {
-        display: flex;
-    }
-}
+        /* Hide Filters on Small Screens by Default */
+        @media (max-width: 768px) {
+            .filter-container {
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .filter-toggle {
+                display: block; /* Show toggle button on small screens */
+            }
+
+            /* Show Filters When Toggled */
+            .filter-container.visible {
+                display: flex;
+            }
+        }
 
         * {
-    margin: 0;
-    padding: 0; /* Fixed padding value (100 is invalid) */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    box-sizing: border-box; /* Ensures padding and border are included in element dimensions */
-}
+            margin: 0;
+            padding: 0; /* Fixed padding value (100 is invalid) */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            box-sizing: border-box; /* Ensures padding and border are included in element dimensions */
+        }
 
-.container {
-    display: flex;
-    font-size: 14px;
-    height: 10vh;
-}
+        .container {
+            display: flex;
+            font-size: 14px;
+            height: 10vh;
+        }
 
-.navbar {
-    margin: auto;
-    padding: 0.5rem 1.5rem;
-    background: #333;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure navbar takes full width */
-    max-width: 1200px; /* Limit maximum width for larger screens */
-}
+        .navbar {
+            margin: auto;
+            padding: 0.5rem 1.5rem;
+            background: #333;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Ensure navbar takes full width */
+            max-width: 1200px; /* Limit maximum width for larger screens */
+        }
 
-.nav-links {
-    display: flex;
-    gap: 2rem;
-}
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
 
-.nav-link {
-    list-style: none;
-    height: 100%;
-    padding: 0.5rem 1rem;
-    font-weight: 600;
-    cursor: pointer;
-}
+        .nav-link {
+            list-style: none;
+            height: 100%;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-a {
-    text-decoration: none;
-    color: #fff;
-}
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
 
-/* Style for the select dropdown container */
-.nav-link.services select {
-    appearance: none; /* Remove default arrow */
-    -webkit-appearance: none; /* Remove default arrow for Safari */
-    -moz-appearance: none; /* Remove default arrow for Firefox */
-    background-color: transparent; /* Match the background */
-    border: none; /* Remove border */
-    color: #fff; /* Text color */
-    font-size: inherit; /* Inherit font size */
-    font-family: inherit; /* Inherit font family */
-    padding: 0.5rem 2rem 0.5rem 1rem; /* Add padding */
-    cursor: pointer; /* Show pointer cursor */
-    outline: none; /* Remove focus outline */
-    border-radius: 0.5rem; /* Add rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
+        /* Style for the select dropdown container */
+        .nav-link.services select {
+            appearance: none; /* Remove default arrow */
+            -webkit-appearance: none; /* Remove default arrow for Safari */
+            -moz-appearance: none; /* Remove default arrow for Firefox */
+            background-color: transparent; /* Match the background */
+            border: none; /* Remove border */
+            color: #fff; /* Text color */
+            font-size: inherit; /* Inherit font size */
+            font-family: inherit; /* Inherit font family */
+            padding: 0.5rem 2rem 0.5rem 1rem; /* Add padding */
+            cursor: pointer; /* Show pointer cursor */
+            outline: none; /* Remove focus outline */
+            border-radius: 0.5rem; /* Add rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
 
-/* Style for the select dropdown arrow */
-.nav-link.services select {
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center; /* Position the arrow */
-    background-size: 12px; /* Size of the arrow */
-}
+        /* Style for the select dropdown arrow */
+        .nav-link.services select {
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center; /* Position the arrow */
+            background-size: 12px; /* Size of the arrow */
+        }
 
-/* Hover effect for the select dropdown */
-.nav-link.services select:hover {
-    background-color: #e50914; /* Red hover effect */
-    color: #fff; /* White text on hover */
-}
+        /* Hover effect for the select dropdown */
+        .nav-link.services select:hover {
+            background-color: #e50914; /* Red hover effect */
+            color: #fff; /* White text on hover */
+        }
 
-/* Focus effect for the select dropdown */
-.nav-link.services select:focus {
-    background-color: rgba(255, 255, 255, 0.2); /* Light focus effect */
-}
+        /* Focus effect for the select dropdown */
+        .nav-link.services select:focus {
+            background-color: rgba(255, 255, 255, 0.2); /* Light focus effect */
+        }
 
-/* Style for the options in the dropdown */
-.nav-link.services select option {
-    background-color: #444; /* Dark background for options */
-    color: #fff; /* White text for options */
-    padding: 0.5rem 1rem; /* Add padding */
-    font-size: 14px; /* Match font size */
-}
+        /* Style for the options in the dropdown */
+        .nav-link.services select option {
+            background-color: #444; /* Dark background for options */
+            color: #fff; /* White text for options */
+            padding: 0.5rem 1rem; /* Add padding */
+            font-size: 14px; /* Match font size */
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0.5rem 1rem; /* Reduce padding for smaller screens */
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 1rem; /* Reduce padding for smaller screens */
+            }
 
-    .nav-links {
-        gap: 1rem; /* Reduce gap between links */
-    }
+            .nav-links {
+                gap: 1rem; /* Reduce gap between links */
+            }
 
-    .nav-link {
-        padding: 0.5rem 0.75rem; /* Adjust padding for smaller screens */
-    }
+            .nav-link {
+                padding: 0.5rem 0.75rem; /* Adjust padding for smaller screens */
+            }
 
-    .nav-link.services select {
-        padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Adjust padding for smaller screens */
-    }
-}
+            .nav-link.services select {
+                padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Adjust padding for smaller screens */
+            }
+        }
 
-@media (max-width: 480px) {
-    .navbar {
-        border-radius: 0; /* Remove border-radius for full-width navbar */
-    }
+        @media (max-width: 480px) {
+            .navbar {
+                border-radius: 0; /* Remove border-radius for full-width navbar */
+            }
 
-    .nav-links {
-        flex-direction: column; /* Stack links vertically */
-        gap: 0.5rem; /* Reduce gap further */
-    }
+            .nav-links {
+                flex-direction: column; /* Stack links vertically */
+                gap: 0.5rem; /* Reduce gap further */
+            }
 
-    .nav-link {
-        width: 100%; /* Full width for links */
-        text-align: center; /* Center-align text */
-    }
+            .nav-link {
+                width: 100%; /* Full width for links */
+                text-align: center; /* Center-align text */
+            }
 
-    .nav-link.services select {
-        width: 100%; /* Full width for dropdowns */
-        text-align: center; /* Center-align text */
-    }
-}
-@media (max-width: 768px) {
-    .search-filter-bar {
-        flex-direction: column;
-        gap: 8px;
-    }
+            .nav-link.services select {
+                width: 100%; /* Full width for dropdowns */
+                text-align: center; /* Center-align text */
+            }
+        }
 
-    .filter-container {
-        flex-direction: column;
-        width: 100%;
-    }
+        @media (max-width: 768px) {
+            .search-filter-bar {
+                flex-direction: column;
+                gap: 8px;
+            }
 
-    .filter-dropdown {
-        width: 100%;
-    }
-    .search-bar{
-        display: flex;
-        align-items: center;
-    }
-    .search-bar .clear-icon{
-        margin-left: auto;
-    }
-    
-}
+            .filter-container {
+                flex-direction: column;
+                width: 100%;
+            }
 
+            .filter-dropdown {
+                width: 100%;
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+            }
+
+            .search-bar .clear-icon {
+                margin-left: auto;
+            }
+        }
 
 
         /* Movie Container */
+        .content-wrapper{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
         .movie-container {
             display: flex;
             flex-wrap: wrap;
@@ -403,6 +423,7 @@ a {
                 width: 100%;
             }
         }
+
         @media (max-width: 768px) {
             .movie-container {
                 flex-direction: column;
@@ -416,6 +437,114 @@ a {
 
             .search-bar input {
                 width: 150px; /* Smaller width for mobile */
+            }
+        }
+
+        /* Slider Styles */
+        .swiper {
+            width: 100%;
+            max-width: 1080px; /* Match the width of the movie container */
+            height: 580px; /* Fixed height for the slider */
+            margin: 20px auto; /* Center the slider */
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: flex-end; /* Align content to the bottom */
+            justify-content: space-between; /* Space between title and button */
+            position: relative;
+            background: transparent;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the container */
+            object-position: center; /* Ensure the head of the image is not cut */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .home-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            padding: 15px 20px;
+             /* Limit text width */
+            text-align: center; /* Align text to the left */
+            background: transparent; /* Semi-transparent background */
+            border-radius: 10px;
+            color: #e50914;
+        }
+
+        .home-text span {
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .home-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            color:  #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: #e50914;
+            color: #fff;
+            font-weight: 500;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+            margin-left: auto; /* Push button to the right */
+        }
+
+        .btn:hover {
+            background: #ff2c1f; /* Darker red on hover */
+        }
+
+        .swiper-pagination {
+            bottom: 20px !important;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--bg-color) !important;
+            opacity: 0.5 !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--main-color) !important;
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            .swiper {
+                height: 300px; /* Adjust height for smaller screens */
+            }
+
+            .home-text h1 {
+                font-size: 2rem; /* Adjust font size for smaller screens */
+            }
+
+            .home-text span {
+                font-size: 1rem; /* Adjust font size for smaller screens */
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -480,80 +609,175 @@ a {
                 <option value="kr">Korean</option>
             </select>
         </div>
+        
     </div>
-    <div class="movie-container">
-        <section data-genre="action crime" data-year="2023" data-rating="4" data-language="en">
-            <a href="blacklist.html">
-                <img src="717eUMztmbL.webp" alt="Movie Poster">
-            </a>
-            <figcaption>The Blacklist</figcaption>
+
+    <!-- Slider Section -->
+     <div class="content-wrapper">
+        <section class="home swiper" id="home">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <img src="wp1915204-the-blacklist-wallpapers.jpg" alt="The Blacklist">
+                    <div class="home-text">
+                        <span>Sony Pictures</span>
+                        <h1>The Blacklist</h1>
+                    </div>
+                    <a href="blacklist.html" class="btn">Watch Now</a>
+                </div>
+    
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <img src="e1f43491b3135222b37cce363bbca065_840.jpg" alt="Çukur">
+                    <div class="home-text">
+                        <span>Ay Yapım</span>
+                        <h1>Çukur</h1>
+                    </div>
+                    <a href="cukur.html" class="btn">Watch Now</a>
+                </div>
+    
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <img src="wp13933671-lovely-runner-wallpapers.jpg" alt="Lovely Runner">
+                    <div class="home-text">
+                        <span>Bon Factory</span>
+                        <h1>Lovely Runner</h1>
+                    </div>
+                    <a href="lovelyRunner.html" class="btn">Watch Now</a>
+                </div>
+            </div>
+    
+            <!-- Swiper Pagination -->
+            <div class="swiper-pagination"></div>
         </section>
-        <section data-genre="drama action" data-year="2022" data-rating="5" data-language="tk">
-            <a href="cukur.html">
-                <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
-            </a>
-            <figcaption>Çukur</figcaption>
-        </section>
-        <section data-genre="comedy romantic drama" data-year="2021" data-rating="3" data-language="kr">
-            <a href="lovelyRunner.html">
-                <img src="81u+55risFL.webp" alt="Movie Poster">
-            </a>
-            <figcaption>Lovely Runner</figcaption>
-        </section>
-        <section data-genre="action" data-year="2023" data-rating="4" data-language="en">
-            <a href="rocky4.html">
-                <img src="a1820276624908f3d45de4abbaf24317.webp" alt="Movie Poster">
-            </a>
-            <figcaption>Rocky 4</figcaption>
-        </section>
-        <section data-genre="drama" data-year="2022" data-rating="5" data-language="kr">
-            <a href="penthouse.html">
-                <img src="c9c4b0bbd7f30d1cec2dea10942ff8e9.webp" alt="Movie Poster">
-            </a>
-            <figcaption>The Penthouse</figcaption>
-        </section>
-        <section data-genre="comedy" data-year="2021" data-rating="3" data-language="en">
-            <a href="pompeii.html">
-                <img src="81YsWAgE2eL.webp" alt="Movie Poster">
-            </a>
-            <figcaption>Pompeii</figcaption>
-        </section>
-    </div>
+    
+        <div class="movie-container">
+            <section data-genre="action,crime" data-year="2023" data-rating="4" data-language="en">
+                <a href="blacklist.html">
+                    <img src="717eUMztmbL.webp" alt="Movie Poster">
+                </a>
+                <figcaption>The Blacklist</figcaption>
+            </section>
+            <section data-genre="drama,action" data-year="2022" data-rating="5" data-language="tk">
+                <a href="cukur.html">
+                    <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
+                </a>
+                <figcaption>Çukur</figcaption>
+            </section>
+            <section data-genre="comedy,romantic,drama" data-year="2021" data-rating="3" data-language="kr">
+                <a href="lovelyRunner.html">
+                    <img src="81u+55risFL.webp" alt="Movie Poster">
+                </a>
+                <figcaption>Lovely Runner</figcaption>
+            </section>
+            <section data-genre="action" data-year="2023" data-rating="4" data-language="english">
+                <a href="rocky4.html">
+                    <img src="a1820276624908f3d45de4abbaf24317.webp" alt="Movie Poster">
+                </a>
+                <figcaption>Rocky 4</figcaption>
+            </section>
+            <section data-genre="drama" data-year="2022" data-rating="5" data-language="hindi">
+                <a href="penthouse.html">
+                    <img src="c9c4b0bbd7f30d1cec2dea10942ff8e9.webp" alt="Movie Poster">
+                </a>
+                <figcaption>The Penthouse</figcaption>
+            </section>
+            <section data-genre="comedy" data-year="2021" data-rating="3" data-language="spanish">
+                <a href="pompeii.html">
+                    <img src="81YsWAgE2eL.webp" alt="Movie Poster">
+                </a>
+                <figcaption>Pompeii</figcaption>
+            </section>
+        </div>
+     </div>
+    
     <!-- Footer -->
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        function applyFilters() {
-            const genre = document.getElementById('genre').value;
-            const year = document.getElementById('year').value;
-            const rating = document.getElementById('rating').value;
-            const language = document.getElementById('language').value;
+        let swiperInstance = null; // Store the Swiper instance globally
 
-            const movieSections = document.querySelectorAll('.movie-container section');
-            movieSections.forEach(section => {
-                const movieGenres = section.getAttribute('data-genre').split(' '); // Split genres into an array
-                const movieYear = section.getAttribute('data-year');
-                const movieRating = section.getAttribute('data-rating');
-                const movieLanguage = section.getAttribute('data-language');
-
-                // Check if any of the movie's genres match the selected genre
-                const genreMatch = genre === 'all' || movieGenres.includes(genre);
-                const yearMatch = year === 'all' || movieYear === year;
-                const ratingMatch = rating === 'all' || movieRating >= rating;
-                const languageMatch = language === 'all' || movieLanguage === language;
-
-                if (genreMatch && yearMatch && ratingMatch && languageMatch) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-        
+        // Function to initialize Swiper
+        function initializeSwiper() {
+            swiperInstance = new Swiper(".home", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
             });
         }
-        function toggleSearch() {
-            const searchBar = document.querySelector('.search-bar');
-            searchBar.classList.toggle('active');
+
+        // Function to destroy Swiper
+        function destroySwiper() {
+            if (swiperInstance) {
+                swiperInstance.destroy(true, true); // Destroy the Swiper instance
+                swiperInstance = null;
+            }
+        }
+
+        // Function to hide the slider
+        function hideSlider() {
+            const slider = document.getElementById("home");
+            slider.classList.add("hidden"); // Add the 'hidden' class
+            destroySwiper(); // Destroy Swiper when hiding the slider
+        }
+
+        // Function to show the slider
+        function showSlider() {
+            const slider = document.getElementById("home");
+            slider.classList.remove("hidden"); // Remove the 'hidden' class
+            initializeSwiper(); // Reinitialize Swiper when showing the slider
+        }
+
+        // Initialize Swiper on page load
+        initializeSwiper();
+
+        // Function to apply filters
+        function applyFilters() {
+            const genre = document.getElementById("genre").value.toLowerCase();
+            const year = document.getElementById("year").value;
+            const rating = document.getElementById("rating").value;
+            const language = document.getElementById("language").value;
+
+            const movieSections = document.querySelectorAll(".movie-container section");
+
+            // Check if any filter is applied
+            const isFilterApplied = genre !== "all" || year !== "all" || rating !== "all" || language !== "all";
+
+            if (isFilterApplied) {
+                hideSlider(); // Hide the slider if a filter is applied
+            } else {
+                showSlider(); // Show the slider if no filter is applied
+            }
+
+            // Loop through each movie section and apply filters
+            movieSections.forEach(section => {
+                const movieGenres = section.getAttribute("data-genre").toLowerCase().split(",");
+                const movieYear = section.getAttribute("data-year");
+                const movieRating = section.getAttribute("data-rating");
+                const movieLanguage = section.getAttribute("data-language");
+
+                // Check if the movie matches the selected filters
+                const genreMatch = genre === "all" || movieGenres.includes(genre);
+                const yearMatch = year === "all" || movieYear === year;
+                const ratingMatch = rating === "all" || movieRating >= rating;
+                const languageMatch = language === "all" || movieLanguage === language;
+
+                // Show or hide the movie based on filter matches
+                if (genreMatch && yearMatch && ratingMatch && languageMatch) {
+                    section.style.display = "block";
+                } else {
+                    section.style.display = "none";
+                }
+            });
         }
 
         // Clear Search Input
@@ -561,120 +785,38 @@ a {
             const searchInput = document.getElementById('searchInput');
             searchInput.value = '';
             searchInput.focus();
-            document.getElementById('suggestions').style.display = 'none';
-            searchMovie(); // Reset the movie list
+            showSlider(); // Show the slider when search is cleared
+            applyFilters(); // Reset filters
         }
 
         // Search Functionality
         function searchMovie() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const movieSections = document.querySelectorAll('.movie-container section');
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const movieSections = document.querySelectorAll(".movie-container section");
+
+            if (searchTerm.trim() === "") {
+                showSlider(); // Show the slider if the search term is empty
+            } else {
+                hideSlider(); // Hide the slider if the user is searching
+            }
 
             movieSections.forEach(section => {
-                const movieTitle = section.querySelector('figcaption').textContent.toLowerCase();
+                const movieTitle = section.querySelector("figcaption").textContent.toLowerCase();
                 if (movieTitle.includes(searchTerm)) {
-                    section.style.display = 'block';
+                    section.style.display = "block";
                 } else {
-                    section.style.display = 'none';
+                    section.style.display = "none";
                 }
             });
-        }
-
-        // Suggestions (using Fuse.js)
-        const movies = [
-            "The Blacklist",
-            "Çukur",
-            "Lovely Runner",
-            "Rocky 4",
-            "The Penthouse",
-            "Pompeii"
-        ];
-
-        const fuse = new Fuse(movies, {
-            includeScore: true,
-            threshold: 0.3,
-        });
-
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            const suggestionsContainer = document.getElementById('suggestions');
-
-            if (query === '') {
-                suggestionsContainer.style.display = 'none';
-                return;
-            }
-
-            const results = fuse.search(query);
-            showSuggestions(results);
-        });
-
-        function showSuggestions(results) {
-            const suggestionsContainer = document.getElementById('suggestions');
-            suggestionsContainer.innerHTML = '';
-
-            if (results.length === 0) {
-                suggestionsContainer.innerHTML = "<div class='suggestion-item'>No matches found</div>";
-                suggestionsContainer.style.display = 'block';
-                return;
-            }
-
-            results.forEach(result => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.className = 'suggestion-item';
-                suggestionItem.textContent = result.item;
-                suggestionItem.addEventListener('click', () => {
-                    document.getElementById('searchInput').value = result.item;
-                    suggestionsContainer.style.display = 'none';
-                    searchMovie();
-                });
-                suggestionsContainer.appendChild(suggestionItem);
-            });
-
-            suggestionsContainer.style.display = 'block';
         }
         function toggleFilters() {
             const filterContainer = document.getElementById('filterContainer');
             filterContainer.classList.toggle('visible');
         }
 
+        // Reset Filters
+
         // Real-Time Filter Functionality
-        function applyFilters() {
-            const genre = document.getElementById('genre').value;
-            const year = document.getElementById('year').value;
-            const rating = document.getElementById('rating').value;
-            const language = document.getElementById('language').value;
-
-            const movieSections = document.querySelectorAll('.movie-container section');
-            movieSections.forEach(section => {
-                const movieGenres = section.getAttribute('data-genre').split(' '); // Split genres into an array
-                const movieYear = section.getAttribute('data-year');
-                const movieRating = section.getAttribute('data-rating');
-                const movieLanguage = section.getAttribute('data-language');
-
-                // Check if any of the movie's genres match the selected genre
-                const genreMatch = genre === 'all' || movieGenres.includes(genre);
-                const yearMatch = year === 'all' || movieYear === year;
-                const ratingMatch = rating === 'all' || movieRating >= rating;
-                const languageMatch = language === 'all' || movieLanguage === language;
-
-                if (genreMatch && yearMatch && ratingMatch && languageMatch) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
-
-        // Add event listeners to dropdowns for real-time filtering
-        document.getElementById('genre').addEventListener('change', applyFilters);
-        document.getElementById('year').addEventListener('change', applyFilters);
-        document.getElementById('rating').addEventListener('change', applyFilters);
-        document.getElementById('language').addEventListener('change', applyFilters);
-
-        // Initial filter application
-        applyFilters();
-
-        // Add event listeners to dropdowns for real-time filtering
         document.getElementById('genre').addEventListener('change', applyFilters);
         document.getElementById('year').addEventListener('change', applyFilters);
         document.getElementById('rating').addEventListener('change', applyFilters);
