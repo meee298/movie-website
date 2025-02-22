@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark - Next Movie</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html"><h1>Next Movie</h1></a>
+    </header>
+    <section>
+        <h2>Dark</h2>
+        <div class="content-wrapper">
+            <div class="poster">
+                <img src="Dark wallpaper.jpeg" alt="Movie Poster">
+            </div>
+            <div class="description">
+                <p>Dark is a German sci-fi thriller about a small town where children’s disappearances uncover a web of secrets, time travel, and interconnected family dramas. Known for its complex plot, dark tone, and mind-bending twists, it’s a must-watch for fans of thought-provoking, nonlinear storytelling. The show spans multiple timelines—1953, 1986, 2019, and beyond—and explores themes of fate, existentialism, and the consequences of time travel. With its haunting atmosphere, intricate storytelling, and stellar performances</p>
+                <div class="additional-info">
+                    <div>
+                        <i class="fas fa-star"></i>
+                        <span>
+                            <a href="https://www.imdb.com/fr/title/tt5753856/" target="_blank">8.7/10 (IMDb)</a>
+                        </span>
+                    </div>
+                    <div>
+                        <i class="fas fa-tv"></i>
+                        <span>Mystery, Drama</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Release: 	december 1, 2017</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <!-- Dynamic heading for seasons/episodes -->
+        <h2 id="sectionHeading">Seasons</h2>
+
+        <!-- Selected season title -->
+        <div id="selectedSeasonTitle" class="selected-season-title"></div>
+
+        <!-- Grid layout for seasons -->
+        <div id="seasonGrid" class="season-grid">
+            <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
+                <h3>Season 1</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season2', 'Season 2')">
+                <h3>Season 2</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season3', 'Season 3')">
+                <h3>Season 3</h3>
+            </div>
+        </div>
+
+        <!-- Grid layout for episodes -->
+        <div id="episodeGrid" class="episode-grid"></div>
+
+        <!-- Back button -->
+        <button id="backButton" class="back-button" onclick="showSeasons()" style="display: none;">
+            <i class="fas fa-arrow-left"></i> Back to Seasons
+        </button>
+    </section>
+    <footer>
+        &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
+    </footer>
+    <script>
+        // Server links for Season 1
+        const serverLinks = {
+            season1: {
+                episode1: "https://fsdcmo.sbs/e/hgyepywq22i2",
+                episode2: "https://fsdcmo.sbs/e/3d02cogy3p2r",
+                episode3: "https://fsdcmo.sbs/e/ujvkxnxhi27m",
+                episode4: "https://fsdcmo.sbs/e/zbrg1dxxj61n",
+                episode5: "https://fsdcmo.sbs/e/2vaz2ji1c67c",
+                episode6: "https://fsdcmo.sbs/e/t7taprtwjjb7",
+                episode7: "https://fsdcmo.sbs/e/ont3cgze6xi9",
+                episode8: "https://fsdcmo.sbs/e/qbidp2kwvxzo",
+                episode9: "https://fsdcmo.sbs/e/3mx13x2usxuc",
+                episode10: "https://fsdcmo.sbs/e/r8hxlvoecapc",
+                // Add more episodes as needed
+            },
+            season2: {
+                episode1: "https://fsdcmo.sbs/e/ghfzb0y9o66i",
+                episode2: "https://fsdcmo.sbs/e/9wunqfnqq989",
+                episode3: "https://fsdcmo.sbs/e/swrma6s7lli2",
+                episode4: "https://fsdcmo.sbs/e/rpje5bsovj3l",
+                episode5: "https://fsdcmo.sbs/e/n9scnc1ihvs4",
+                episode6: "https://fsdcmo.sbs/e/0xf28ol73qjo",
+                episode7: "https://fsdcmo.sbs/e/mubr93eiia03",
+                episode8: "https://fdewsdc.sbs/embed/hsjr8126yvjz",
+            },
+            season3: {
+                episode1: "https://fsdcmo.sbs/e/sbsrmrbqa5v5",
+                episode2: "https://fsdcmo.sbs/e/i65trvf7ky1l",
+                episode3: "https://fsdcmo.sbs/e/xg78ba448pts",
+                episode4: "https://fsdcmo.sbs/e/pooj8nhmqx5j",
+                episode5: "https://fsdcmo.sbs/e/jep3yj8iwmtn",
+                episode6: "https://fsdcmo.sbs/e/jp1ix9y2js0q",
+                episode7: "https://fsdcmo.sbs/e/z0dw8fe7n3zn",
+                episode8: "https://fsdcmo.sbs/e/p8cp4wq4qjdv",
+            },
+
+        };
+        // Function to show episodes for a selected season
+        function showEpisodes(season, seasonName) {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Hide season grid and show episode grid
+            seasonGrid.style.display = "none";
+            episodeGrid.style.display = "grid";
+            selectedSeasonTitle.style.display = "block";
+            backButton.style.display = "flex";
+
+            // Update the section heading
+            sectionHeading.textContent = "Episodes";
+
+            // Set the selected season title
+            selectedSeasonTitle.textContent = seasonName;
+
+            // Clear existing episodes
+            episodeGrid.innerHTML = "";
+
+            // Add episodes for the selected season
+            if (season) {
+                for (let i = 1; i <= 23; i++) {
+                    const episodeKey = `episode${i}`;
+                    const episodeLink = serverLinks[season][episodeKey];
+
+                    if (episodeLink) {
+                        const episodeCard = document.createElement("div");
+                        episodeCard.className = "episode-card";
+                        episodeCard.innerHTML = `<a href="${episodeLink}" target="_blank">Episode ${i}</a>`;
+                        episodeGrid.appendChild(episodeCard);
+                    }
+                }
+            }
+        }
+
+        // Function to show seasons again
+        function showSeasons() {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Show season grid and hide episode grid
+            seasonGrid.style.display = "grid";
+            episodeGrid.style.display = "none";
+            selectedSeasonTitle.style.display = "none";
+            backButton.style.display = "none";
+
+            // Update the section heading
+            sectionHeading.textContent = "Seasons";
+        }
+    </script>
+</body>
+</html>
