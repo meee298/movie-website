@@ -370,8 +370,8 @@
         }
 
         img {
-            width: 100%;
-            height: auto;
+            width: auto;
+            height: 280px;
             border-radius: 10px;
         }
 
@@ -428,11 +428,11 @@
             .movie-container {
                 flex-direction: column;
                 align-items: center;
-                
+                height: auto;
             }
 
             section {
-                width: 80%;
+                width: 50%;
                 max-width: 300px;
             }
 
@@ -533,7 +533,7 @@
         @media (max-width: 768px) {
             .swiper {
                 height: 300px;
-                width: 330px;/* Adjust height for smaller screens */
+                width: 90%; /* Adjust height for smaller screens */
             }
 
             .home-text h1 {
@@ -591,12 +591,52 @@
                 <option value="crime">Crime</option>
                 <option value="comedy">Comedy</option>
                 <option value="romantic">Romantic</option>
+                <option value="mystery">Mystery</option>
             </select>
             <select id="year" class="filter-dropdown">
                 <option value="all">All Years</option>
                 <option value="2025">2025</option>
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+                <option value="1999">1999</option>
+                <option value="1998">1998</option>
+                <option value="1997">1997</option>
+                <option value="1996">1996</option>
+                <option value="1995">1995</option>
+                <option value="1994">1994</option>
+                <option value="1993">1993</option>
+                <option value="1992">1992</option>
+                <option value="1991">1991</option>
+                <option value="1990">1990</option>
+                <option value="1989">1989</option>
+                <option value="1988">1988</option>
+                <option value="1987">1987</option>
+                <option value="1986">1986</option>
+                <option value="1985">1985</option>
+                <option value="1984">1984</option>
             </select>
             <select id="rating" class="filter-dropdown">
                 <option value="all">All Ratings</option>
@@ -622,6 +662,7 @@
                 <div class="swiper-slide">
                     <img src="blacklist.jpg" alt="The Blacklist">
                     <div class="home-text">
+                        
                         <h1>The Blacklist</h1>
                     </div>
                     <a href="blacklist.html" class="btn">Watch Now</a>
@@ -631,6 +672,7 @@
                 <div class="swiper-slide">
                     <img src="cukur.jpg" alt="Çukur">
                     <div class="home-text">
+                        
                         <h1>Çukur</h1>
                     </div>
                     <a href="cukur.html" class="btn">Watch Now</a>
@@ -638,11 +680,20 @@
     
                 <!-- Slide 3 -->
                 <div class="swiper-slide">
-                    <img src="lovelyrunner.jpg" alt="Lovely Runner">
+                    <img src="lovelyrunner.jpg".jpg" alt="Lovely Runner">
                     <div class="home-text">
+                        
                         <h1>Lovely Runner</h1>
                     </div>
                     <a href="lovelyRunner.html" class="btn">Watch Now</a>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="dark.jpg" alt="Dark">
+                    <div class="home-text">
+                        <h1>Dark</h1>
+                    </div>
+                    <a href="dark.html" class="btn">Watch Now</a>
                 </div>
             </div>
     
@@ -651,38 +702,44 @@
         </section>
     
         <div class="movie-container">
-            <section data-genre="action,crime" data-year="2023" data-rating="4" data-language="en">
-                <a href="blacklist.html">
+            <section data-genre="action,crime,mystery" data-year="2013" data-rating="4" data-language="en">
+                <a href="details1.html">
                     <img src="717eUMztmbL.webp" alt="Movie Poster">
                 </a>
                 <figcaption>The Blacklist</figcaption>
             </section>
-            <section data-genre="drama,action" data-year="2022" data-rating="5" data-language="tk">
-                <a href="cukur.html">
+            <section data-genre="drama,action" data-year="2017" data-rating="5" data-language="tk">
+                <a href="details2.html">
                     <img src="rB2TlH4QTbhJDG6KzhWiRamSYfL-medium.webp" alt="Movie Poster">
                 </a>
                 <figcaption>Çukur</figcaption>
             </section>
-            <section data-genre="comedy,romantic,drama" data-year="2021" data-rating="3" data-language="kr">
-                <a href="lovelyRunner.html">
+            <section data-genre="comedy,romantic,drama" data-year="2021" data-rating="4" data-language="kr">
+                <a href="details3.html">
                     <img src="81u+55risFL.webp" alt="Movie Poster">
                 </a>
                 <figcaption>Lovely Runner</figcaption>
             </section>
-            <section data-genre="action" data-year="2023" data-rating="4" data-language="english">
-                <a href="rocky4.html">
+            <section data-genre="drama,mystery" data-year="2023" data-rating="4" data-language="en">
+                <a href="dark.html">
+                    <img src="Dark wallpaper.jpeg" alt="Movie Poster">
+                </a>
+                <figcaption>Dark</figcaption>
+            </section>
+            <section data-genre="sport,action" data-year="2023" data-rating="4" data-language="english">
+                <a href="details4.html">
                     <img src="a1820276624908f3d45de4abbaf24317.webp" alt="Movie Poster">
                 </a>
                 <figcaption>Rocky 4</figcaption>
             </section>
             <section data-genre="drama" data-year="2022" data-rating="5" data-language="hindi">
-                <a href="penthouse.html">
+                <a href="home.html">
                     <img src="c9c4b0bbd7f30d1cec2dea10942ff8e9.webp" alt="Movie Poster">
                 </a>
                 <figcaption>The Penthouse</figcaption>
             </section>
             <section data-genre="comedy" data-year="2021" data-rating="3" data-language="spanish">
-                <a href="pompeii.html">
+                <a href="details5.html">
                     <img src="81YsWAgE2eL.webp" alt="Movie Poster">
                 </a>
                 <figcaption>Pompeii</figcaption>
@@ -704,7 +761,7 @@
                 spaceBetween: 30,
                 centeredSlides: true,
                 autoplay: {
-                    delay: 3000,
+                    delay: 5000,
                     disableOnInteraction: false,
                 },
                 pagination: {
