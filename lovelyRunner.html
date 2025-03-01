@@ -20,7 +20,7 @@
                 <img src="81u+55risFL.webp" alt="Movie Poster">
             </div>
             <div class="description">
-                <p>Lovely Runner is a romantic fantasy K-drama that follows a struggling actress who mysteriously travels back in time to save her favorite idol from a tragic fate. As she navigates the past, she gets a second chance at love and life, but changing destiny isn’t easy. Filled with heartwarming moments, time-travel twists, and emotional depth, Lovely Runner is a captivating blend of romance and drama that keeps viewers hooked</p>
+                <p>Lovely Runner is a romantic fantasy K-drama that follows a struggling actress who mysteriously travels back in time to save her favorite idol from a tragic fate. As she navigates the past, she gets a second chance at love and life, but changing destiny isn’t easy. Filled with heartwarming moments, time-travel twists, and emotional depth, Lovely Runner is a captivating blend of romance and drama that keeps viewers hooked.</p>
                 <div class="additional-info">
                     <div>
                         <i class="fas fa-star"></i>
@@ -34,7 +34,7 @@
                     </div>
                     <div>
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Release: 	April 8, 2024</span>
+                        <span>Release: April 8, 2024</span>
                     </div>
                 </div>
             </div>
@@ -43,20 +43,27 @@
     <section>
         <!-- Dynamic heading for seasons/episodes -->
         <h2 id="sectionHeading">Seasons</h2>
-
+    
+        <!-- Continue Watching Button -->
+        <div id="continueWatching" class="continue-watching" style="display: none;">
+            <button onclick="goToLastWatchedEpisode()">
+                <i class="fas fa-play"></i> Continue Watching
+            </button>
+        </div>
+    
         <!-- Selected season title -->
         <div id="selectedSeasonTitle" class="selected-season-title"></div>
-
+    
         <!-- Grid layout for seasons -->
         <div id="seasonGrid" class="season-grid">
             <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
                 <h3>Season 1</h3>
             </div>
         </div>
-
+    
         <!-- Grid layout for episodes -->
         <div id="episodeGrid" class="episode-grid"></div>
-
+    
         <!-- Back button -->
         <button id="backButton" class="back-button" onclick="showSeasons()" style="display: none;">
             <i class="fas fa-arrow-left"></i> Back to Seasons
@@ -67,83 +74,193 @@
     </footer>
     <script>
         // Server links for Season 1
-        const serverLinks = {
-            season1: {
-                episode1: "https://fsdcmo.sbs/e/kg1gxn82hkgs",
-                episode2: "https://fsdcmo.sbs/e/wcgg17qquxbg",
-                episode3: "https://uqload.to/embed-m35z62oxtmtp.html",
-                episode4: "https://fsdcmo.sbs/e/w0dxck7y7r04",
-                episode5: "https://fsdcmo.sbs/e/wt0rglgiypbh",
-                episode6: "https://fsdcmo.sbs/e/x4y7z4tjpijd",
-                episode7: "https://fsdcmo.sbs/e/41fzrewd2oyr",
-                episode8: "https://fsdcmo.sbs/e/72f2f8qak6k9",
-                episode9: "https://fsdcmo.sbs/e/u60xxba2uay8",
-                episode10: "https://fsdcmo.sbs/e/2urpkjxlvpy8",
-                episode11: "https://fsdcmo.sbs/e/zlra2r152357",
-                episode12: "https://fsdcmo.sbs/e/yb8lqukfo9g7",
-                episode13: "https://fsdcmo.sbs/e/twwde90ctgfu",
-                episode14: "https://fsdcmo.sbs/e/6s4hw9f7p7hy",
-                episode15: "https://fsdcmo.sbs/e/pczreqfp5rot",
-                episode16: "https://fsdcmo.sbs/e/y4svsvuzzm4u",
-                // Add more episodes as needed
-            },
-        };
-        // Function to show episodes for a selected season
-        function showEpisodes(season, seasonName) {
-            const seasonGrid = document.getElementById("seasonGrid");
-            const episodeGrid = document.getElementById("episodeGrid");
-            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
-            const backButton = document.getElementById("backButton");
-            const sectionHeading = document.getElementById("sectionHeading");
+        // Server links for Season 1
+const serverLinks = {
+    season1: {
+        episode1: "https://fsdcmo.sbs/e/kg1gxn82hkgs",
+        episode2: "https://fsdcmo.sbs/e/wcgg17qquxbg",
+        episode3: "https://uqload.to/embed-m35z62oxtmtp.html",
+        episode4: "https://fsdcmo.sbs/e/w0dxck7y7r04",
+        episode5: "https://fsdcmo.sbs/e/wt0rglgiypbh",
+        episode6: "https://fsdcmo.sbs/e/x4y7z4tjpijd",
+        episode7: "https://fsdcmo.sbs/e/41fzrewd2oyr",
+        episode8: "https://fsdcmo.sbs/e/72f2f8qak6k9",
+        episode9: "https://fsdcmo.sbs/e/u60xxba2uay8",
+        episode10: "https://fsdcmo.sbs/e/2urpkjxlvpy8",
+        episode11: "https://fsdcmo.sbs/e/zlra2r152357",
+        episode12: "https://fsdcmo.sbs/e/yb8lqukfo9g7",
+        episode13: "https://fsdcmo.sbs/e/twwde90ctgfu",
+        episode14: "https://fsdcmo.sbs/e/6s4hw9f7p7hy",
+        episode15: "https://fsdcmo.sbs/e/pczreqfp5rot",
+        episode16: "https://fsdcmo.sbs/e/y4svsvuzzm4u",
+    },
+};
 
-            // Hide season grid and show episode grid
-            seasonGrid.style.display = "none";
-            episodeGrid.style.display = "grid";
-            selectedSeasonTitle.style.display = "block";
-            backButton.style.display = "flex";
+const episodeTitles = {
+    episode1: "Live Another Day",
+    episode2: "I Want to Protect You",
+    episode3: "It's All About the Timing",
+    episode4: "I'm Back",
+    episode5: "Sun Jae Sings",
+    episode6: "Épisode #1.6",
+    episode7: "Thank You for Being Alive",
+    episode8: "How About Now?",
+    episode9: "Sol Goes Back Again",
+    episode10: "I Figured It All Out",
+    episode11: "Become a Couple",
+    episode12: "Go on a Trip",
+    episode13: "My Future Has Changed",
+    episode14: "The Wrong Script",
+    episode15: "Memories Don't Disappear",
+    episode16: "I Remember Everything",
+};
 
-            // Update the section heading
-            sectionHeading.textContent = "Episodes";
+// Function to save the last watched episode
+function saveLastWatchedEpisode(season, episode) {
+    localStorage.setItem('lastWatchedSeason', season);
+    localStorage.setItem('lastWatchedEpisode', episode);
 
-            // Set the selected season title
-            selectedSeasonTitle.textContent = seasonName;
+    // Mark the episode as watched
+    let watchedEpisodes;
+    try {
+        watchedEpisodes = JSON.parse(localStorage.getItem('watchedEpisodes')) || [];
+    } catch (e) {
+        watchedEpisodes = []; // Fallback to an empty array if parsing fails
+    }
 
-            // Clear existing episodes
-            episodeGrid.innerHTML = "";
+    if (!watchedEpisodes.includes(episode)) {
+        watchedEpisodes.push(episode);
+        localStorage.setItem('watchedEpisodes', JSON.stringify(watchedEpisodes));
+    }
+}
 
-            // Add episodes for the selected season
-            if (season) {
-                for (let i = 1; i <= 23; i++) {
-                    const episodeKey = `episode${i}`;
-                    const episodeLink = serverLinks[season][episodeKey];
+// Function to retrieve the last watched episode
+function getLastWatchedEpisode() {
+    return {
+        season: localStorage.getItem('lastWatchedSeason'),
+        episode: localStorage.getItem('lastWatchedEpisode'),
+    };
+}
 
-                    if (episodeLink) {
-                        const episodeCard = document.createElement("div");
-                        episodeCard.className = "episode-card";
-                        episodeCard.innerHTML = `<a href="${episodeLink}" target="_blank">Episode ${i}</a>`;
-                        episodeGrid.appendChild(episodeCard);
-                    }
+// Function to go to the last watched episode
+function goToLastWatchedEpisode() {
+    const lastWatched = getLastWatchedEpisode();
+    if (lastWatched.season && lastWatched.episode) {
+        const episodeLink = serverLinks[lastWatched.season][lastWatched.episode];
+        if (episodeLink) {
+            window.open(episodeLink, '_blank');
+        }
+    }
+}
+
+// Function to show episodes for a selected season
+function showEpisodes(season, seasonName) {
+    console.log("Showing episodes for:", season); // Debugging
+    const seasonGrid = document.getElementById("seasonGrid");
+    const episodeGrid = document.getElementById("episodeGrid");
+    const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+    const backButton = document.getElementById("backButton");
+    const sectionHeading = document.getElementById("sectionHeading");
+
+    seasonGrid.style.display = "none";
+    episodeGrid.style.display = "grid";
+    selectedSeasonTitle.style.display = "block";
+    backButton.style.display = "flex";
+
+    // Update the section heading
+    sectionHeading.textContent = "Episodes";
+
+    // Set the selected season title
+    selectedSeasonTitle.textContent = seasonName;
+
+    // Clear existing episodes
+    episodeGrid.innerHTML = "";
+
+    // Add episodes for the selected season
+    if (serverLinks[season]) {
+        console.log("Server links for season:", serverLinks[season]); // Debugging
+        for (let i = 1; i <= Object.keys(serverLinks[season]).length; i++) {
+            const episodeKey = `episode${i}`;
+            const episodeLink = serverLinks[season][episodeKey];
+            const episodeTitle = episodeTitles[episodeKey] || `Episode ${i}`;
+            console.log("Episode key:", episodeKey, "Link:", episodeLink); // Debugging
+
+            if (episodeLink) {
+                const episodeCard = document.createElement("div");
+                episodeCard.className = "episode-card";
+                episodeCard.setAttribute('data-episode', episodeKey); // Add data-episode attribute
+                episodeCard.innerHTML = `
+                    <a href="${episodeLink}" target="_blank" onclick="saveLastWatchedEpisode('${season}', '${episodeKey}')">
+                        <div class="episode-info">
+                            <span class="episode-number">Episode ${i}</span>
+                            <span class="episode-title">${episodeTitle}</span>
+                        </div>
+                    </a>
+                `;
+
+                // Check if the episode has been watched
+                let watchedEpisodes;
+                try {
+                    watchedEpisodes = JSON.parse(localStorage.getItem('watchedEpisodes')) || [];
+                } catch (e) {
+                    watchedEpisodes = []; // Fallback to an empty array if parsing fails
                 }
+                if (watchedEpisodes.includes(episodeKey)) {
+                    episodeCard.innerHTML += `<div class="watched-indicator">👁️</div>`;
+                }
+
+                episodeGrid.appendChild(episodeCard);
             }
         }
+        console.log("Episode grid content:", episodeGrid.innerHTML); // Debugging
+    }
 
-        // Function to show seasons again
-        function showSeasons() {
-            const seasonGrid = document.getElementById("seasonGrid");
-            const episodeGrid = document.getElementById("episodeGrid");
-            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
-            const backButton = document.getElementById("backButton");
-            const sectionHeading = document.getElementById("sectionHeading");
+    // Highlight the last watched episode
+    const lastWatched = getLastWatchedEpisode();
+    console.log("Last watched episode:", lastWatched); // Debugging
 
-            // Show season grid and hide episode grid
-            seasonGrid.style.display = "grid";
-            episodeGrid.style.display = "none";
-            selectedSeasonTitle.style.display = "none";
-            backButton.style.display = "none";
+    if (lastWatched.season === season) {
+        // Find the last watched episode card
+        const lastEpisodeCard = episodeGrid.querySelector(`[data-episode="${lastWatched.episode}"]`);
+        console.log("Last episode card:", lastEpisodeCard); // Debugging
 
-            // Update the section heading
-            sectionHeading.textContent = "Seasons";
+        if (lastEpisodeCard) {
+            lastEpisodeCard.classList.add('last-watched');
         }
+    }
+}
+
+// Function to show seasons again
+function showSeasons() {
+    const seasonGrid = document.getElementById("seasonGrid");
+    const episodeGrid = document.getElementById("episodeGrid");
+    const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+    const backButton = document.getElementById("backButton");
+    const sectionHeading = document.getElementById("sectionHeading");
+
+    // Show season grid and hide episode grid
+    seasonGrid.style.display = "grid";
+    episodeGrid.style.display = "none"; // Fix: Set to "none" instead of "grid"
+    selectedSeasonTitle.style.display = "none";
+    backButton.style.display = "none";
+
+    // Update the section heading
+    sectionHeading.textContent = "Seasons";
+}
+
+// Function to check progress and show "Continue Watching" button
+function checkProgress() {
+    const lastWatched = getLastWatchedEpisode();
+    const continueWatching = document.getElementById('continueWatching');
+    if (lastWatched.season && lastWatched.episode) {
+        continueWatching.style.display = 'block';
+    } else {
+        continueWatching.style.display = 'none';
+    }
+}
+
+// Call this function when the page loads
+window.onload = checkProgress;
     </script>
 </body>
 </html>
