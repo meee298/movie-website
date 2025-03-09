@@ -32,8 +32,10 @@
 
         <!-- Grid layout for seasons -->
         <div id="seasonGrid" class="season-grid">
-            <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
-                <h3>Servers</h3>
+            <div class="season-card">
+                <a href="https://www.faselhds.care/video_player?uid=0&vid=f58390a2357ea4256f32caddd234abea&img=https://img.scdns.io/thumb/f58390a2357ea4256f32caddd234abea/large.jpg" target="_blank" rel="noopener noreferrer">
+                    <h3>Server 1080 P</h3>
+                </a>
             </div>
 
         </div>
@@ -49,72 +51,5 @@
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
-    <script>
-        const serverLinks = {
-            season1: {
-                episode1: "https://www.faselhds.care/video_player?uid=0&vid=f58390a2357ea4256f32caddd234abea&img=https://img.scdns.io/thumb/f58390a2357ea4256f32caddd234abea/large.jpg",
-            }    
-        };
-
-        const episodeTitles = {
-    episode1: "1080 P",
-        };
-        // Function to show episodes for a selected season
-        function showEpisodes(season, seasonName) {
-            const seasonGrid = document.getElementById("seasonGrid");
-            const episodeGrid = document.getElementById("episodeGrid");
-            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
-            const backButton = document.getElementById("backButton");
-            const sectionHeading = document.getElementById("sectionHeading");
-
-            // Hide season grid and show episode grid
-            seasonGrid.style.display = "none";
-            episodeGrid.style.display = "grid";
-            selectedSeasonTitle.style.display = "block";
-            backButton.style.display = "flex";
-
-            // Update the section heading
-            sectionHeading.textContent = "Servers";
-
-            // Set the selected season title
-            selectedSeasonTitle.textContent = "Server 1080";
-
-            // Clear existing episodes
-            episodeGrid.innerHTML = "";
-
-            // Add episodes for the selected season
-            if (season) {
-                for (let i = 1; i <= 40; i++) {
-                    const episodeKey = `episode${i}`;
-                    const episodeLink = serverLinks[season][episodeKey];
-
-                    if (episodeLink) {
-                        const episodeCard = document.createElement("div");
-                        episodeCard.className = "episode-card";
-                        episodeCard.innerHTML = `<a href="${episodeLink}" target="_blank">Server ${i}</a>`;
-                        episodeGrid.appendChild(episodeCard);
-                    }
-                }
-            }
-        }
-
-        // Function to show seasons again
-        function showSeasons() {
-            const seasonGrid = document.getElementById("seasonGrid");
-            const episodeGrid = document.getElementById("episodeGrid");
-            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
-            const backButton = document.getElementById("backButton");
-            const sectionHeading = document.getElementById("sectionHeading");
-
-            // Show season grid and hide episode grid
-            seasonGrid.style.display = "grid";
-            episodeGrid.style.display = "none";
-            selectedSeasonTitle.style.display = "none";
-            backButton.style.display = "none";
-
-            // Update the section heading
-            sectionHeading.textContent = "Servers";
-        }
-    </script>
 </body>
 </html>
