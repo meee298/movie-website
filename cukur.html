@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -20,21 +21,504 @@
             </div>
             <div class="description">
                 <p>Çukur is a Turkish crime drama that revolves around the powerful Koçovalı family, who rule the Çukur neighborhood in Istanbul. When their youngest son, Yamaç, returns home after years away, he is forced to take charge and protect his family from dangerous rivals. Filled with intense action, deep family bonds, and shocking betrayals, Çukur blends crime, drama, and romance in a gripping story of loyalty, power, and survival. Its unforgettable characters and powerful storytelling have made it one of Turkey’s most popular series.</p>
+                <div class="additional-info">
+                    <div>
+                        <i class="fas fa-star"></i>
+                        <span>
+                            <a href="https://www.imdb.com/fr/title/tt11947552/" target="_blank">9/10 (IMDb)</a>
+                        </span>
+                    </div>
+                    <div>
+                        <i class="fas fa-tv"></i>
+                        <span>Crime, Action, Drama</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Release: 	October 23, 2017</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <section>
-        <h2>Episodes</h2>
-        <ul>
-            <li><a href="https://uqload.co/embed-vskj8a2zk2jl.html" target="_blank">Episode 1</a></li>
-            <li><a href="https://uqload.co/embed-l9i0540ac1pp.html" target="_blank">Episode 2</a></li>
-            <li><a href="https://uqload.co/embed-nxa7cs5ba01l.html" target="_blank">Episode 3</a></li>
-            <li><a href="https://uqload.co/embed-xt61vmivz8p7.html" target="_blank">Episode 4</a></li>
-            <li><a href="https://uqload.co/embed-wnyoncvin1i9.html" target="_blank">Episode 5</a></li>
-        </ul>
+        <!-- Dynamic heading for seasons/episodes -->
+        <h2 id="sectionHeading">Seasons</h2>
+
+        <!-- Selected season title -->
+        <div id="selectedSeasonTitle" class="selected-season-title"></div>
+
+        <!-- Grid layout for seasons -->
+        <div id="seasonGrid" class="season-grid">
+            <div class="season-card" onclick="showEpisodes('season1', 'Season 1')">
+                <h3>Season 1</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season2', 'Season 2')">
+                <h3>Season 2</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season3', 'Season 3')">
+                <h3>Season 3</h3>
+            </div>
+            <div class="season-card" onclick="showEpisodes('season4', 'Season 4')">
+                <h3>Season 4</h3>
+            </div>
+        </div>
+
+        <!-- Grid layout for episodes -->
+        <div id="episodeGrid" class="episode-grid"></div>
+
+        <!-- Back button -->
+        <button id="backButton" class="back-button" onclick="showSeasons()" style="display: none;">
+            <i class="fas fa-arrow-left"></i> Back to Seasons
+        </button>
     </section>
     <footer>
         &copy; 2025 Next Movie. All Rights Reserved. Created by <a href="https://www.instagram.com/aouslim_/" target="_blank">Mohamed Aouslim</a>.
     </footer>
+    <script>
+        const serverLinks = {
+            season1: {
+                episode1: "https://uqload.co/embed-vskj8a2zk2jl.html",
+                episode2: "https://uqload.co/embed-l9i0540ac1pp.html",
+                episode3: "https://uqload.co/embed-nxa7cs5ba01l.html",
+                episode4: "https://uqload.co/embed-xt61vmivz8p7.html",
+                episode5: "https://uqload.co/embed-wnyoncvin1i9.html",
+                episode6: "https://uqload.co/embed-nuppega7vqon.html",
+                episode7: "https://uqload.co/embed-t5ob0gcotob4.html",
+                episode8: "https://uqload.co/embed-00e1x6f4f7tz.html",
+                episode9: "https://uqload.co/embed-ks6l14pmyz7w.html",
+                episode10: "https://uqload.co/embed-rmrbeiqd0bd0.html",
+                episode11: "https://uqload.co/embed-4o9k7osjkcqg.html",
+                episode12: "https://uqload.co/embed-b9fztso45i50.html",
+                episode13: "https://uqload.co/embed-cgcr53risk85.html",
+                episode14: "https://uqload.co/embed-vs2ht8o7cywc.html",
+                episode15: "https://uqload.co/embed-2xa3obu49sqb.html",
+                episode16: "https://uqload.co/embed-aq90jawanj7a.html",
+                episode17: "https://uqload.co/embed-hjje3u0yb8w8.html",
+                episode18: "https://uqload.co/embed-yu08fpidq33e.html",
+                episode19: "https://uqload.co/embed-gk3p9fmaawvd.html",
+                episode20: "https://uqload.co/embed-nwtgnzf2k8ds.html",
+                episode21: "https://uqload.co/embed-wmbz8d4n5a88.html",
+                episode22: "https://uqload.co/embed-u9abekrkfbnx.html",
+                episode23: "https://uqload.co/embed-8pwqwvrezl4c.html",
+                episode24: "https://uqload.co/embed-gcbtc1t0bz82.html",
+                episode25: "https://uqload.co/embed-tv8kj4exmfgd.html",
+                episode26: "https://uqload.co/embed-evrdsd255y95.html",
+                episode27: "https://uqload.co/embed-a325bln2davm.html",
+                episode28: "https://uqload.co/embed-3f15rywbb9za.html",
+                episode29: "https://uqload.co/embed-rww8ipwue578.html",
+                episode30: "https://uqload.co/embed-bxekk7dgtue9.html",
+                episode31: "https://uqload.co/embed-vdip5i4iwi9q.html",
+                episode32: "https://uqload.co/embed-vbj4205f8mg3.html",
+                episode33: "https://uqload.co/embed-9h8ggqoiwkd3.html",
+                // Add more episodes as needed
+            },
+            season2: {
+                episode1: "https://uqload.co/embed-i5ygxpn3zawd.html",
+                episode2: "https://uqload.co/embed-sslclqrh5zys.html",
+                episode3: "https://uqload.co/embed-lmbaiaq6t8ef.html",
+                episode4: "https://uqload.co/embed-wkpc1urlshjb.html",
+                episode5: "https://uqload.co/embed-t3cqi4imamog.html",
+                episode6: "https://uqload.co/embed-3jzoxuux8yxn.html",
+                episode7: "https://uqload.co/embed-guaf0es3avcy.html",
+                episode8: "https://uqload.co/embed-ul1haehcx6j3.html",
+                episode9: "https://uqload.co/embed-xcqwfou6ds6l.html",
+                episode10: "https://uqload.co/embed-anry2yc3vlc7.html",
+                episode11: "https://uqload.co/embed-183orosb9ksx.html",
+                episode12: "https://uqload.co/embed-fe5qzhmi9id5.html",
+                episode13: "https://uqload.co/embed-dwr0y3sztzjt.html",
+                episode14: "https://uqload.co/embed-2ylp0uaxp7pa.html",
+                episode15: "https://uqload.co/embed-5ux3zju6qdct.html",
+                episode16: "https://uqload.co/embed-2fpv0a1cpylt.html",
+                episode17: "https://uqload.co/embed-pwg33r0y3ojv.html",
+                episode18: "https://uqload.co/embed-6m2d2fr806zh.html",
+                episode19: "https://uqload.co/embed-pwl970tu0588.html",
+                episode20: "https://uqload.co/embed-001p5xcdla74.html",
+                episode21: "https://uqload.co/embed-f4f42x2cgrg6.html",
+                episode22: "https://uqload.co/embed-3az6uhedjmgc.html",
+                episode23: "https://uqload.co/embed-t8r418tb2cm5.html",
+                episode24: "https://uqload.co/embed-3r1ktw9uiwdq.html",
+                episode25: "https://uqload.co/embed-e2vlskhw88zu.html",
+                episode26: "https://uqload.co/embed-t0lw7ay7lr06.html",
+                episode27: "https://uqload.co/embed-z7rpbvfee8e4.html",
+                episode28: "https://uqload.co/embed-edojheiaahvm.html",
+                episode29: "https://uqload.co/embed-n4re3ivm5om6.html",
+                episode30: "https://uqload.co/embed-mokhcsmxta2b.html",
+                episode31: "https://uqload.co/embed-ni6alf6dmtp5.html",
+                episode32: "https://uqload.co/embed-juyp9e65dbyn.html",
+                episode33: "https://uqload.co/embed-107z019t3b7j.html",
+                episode34: "https://uqload.co/embed-lpe5cubcw2xz.html",
+                // Add more episodes as needed
+            },
+            season3: {
+                episode1: "https://uqload.co/embed-zm4su95cjxpm.html",
+                episode2: "https://uqload.co/embed-zkbda0gaohu5.html",
+                episode3: "https://uqload.co/embed-3xklul4f5dc3.html",
+                episode4: "https://uqload.co/embed-j1tu4b7qj68o.html",
+                episode5: "https://uqload.co/embed-dwwew2mnnnwx.html",
+                episode6: "https://uqload.co/embed-xsvh6yjd7gme.html",
+                episode7: "https://uqload.co/embed-vx71g9g4924s.html",
+                episode8: "https://uqload.co/embed-dquc2m9yask4.html",
+                episode9: "https://uqload.co/embed-93y38kx41vdp.html",
+                episode10: "https://uqload.co/embed-cphxy2mr9liu.html",
+                episode11: "https://uqload.co/embed-0wj39erlvle3.html",
+                episode12: "https://uqload.co/embed-drplckaz063c.html",
+                episode13: "https://uqload.co/embed-j1bo169ghbnw.html",
+                episode14: "https://uqload.co/embed-3qqjeanx7ckm.html",
+                episode15: "https://uqload.co/embed-3dlcx2ysbks2.html",
+                episode16: "https://uqload.co/embed-9f2e1lnu7j4o.html",
+                episode17: "https://uqload.co/embed-slumwnz4hfp6.html",
+                episode18: "https://uqload.co/embed-4v93kjwopz0x.html",
+                episode19: "https://uqload.co/embed-uu3p2st13ezk.html",
+                episode20: "https://uqload.co/embed-zg77szs4u4vc.html",
+                episode21: "https://uqload.co/embed-bcn8phwjfufk.html",
+                episode22: "https://uqload.co/embed-goqouh8uxm79.html",
+                episode23: "https://uqload.co/embed-f6jxmn43lz08.html",
+                episode24: "https://uqload.co/embed-u18vy54820td.html",
+                episode25: "https://uqload.co/embed-084r64vrss5i.html",
+                // Add more episodes as needed
+            },
+            season4: {
+                episode1: "https://uqload.co/embed-ipnxq6h6ibzu.html",
+                episode2: "https://uqload.co/embed-ovgkqdglgxbx.html",
+                episode3: "https://uqload.co/embed-kk7i2yy664zu.html",
+                episode4: "https://uqload.co/embed-6pakxutz6gy4.html",
+                episode5: "https://uqload.co/embed-icqatcka3v9a.html",
+                episode6: "https://uqload.co/embed-iglvviytun0d.html",
+                episode7: "https://uqload.co/embed-vq62364ixkmm.html",
+                episode8: "https://uqload.co/embed-fha2lt8ahege.html",
+                episode9: "https://uqload.co/embed-54vigwyp5t4c.html",
+                episode10: "https://uqload.co/embed-j1x9s0kxb1bo.html",
+                episode11: "https://uqload.co/embed-8jm56phak4of.html",
+                episode12: "https://uqload.co/embed-mgy6phhu2qzj.html",
+                episode13: "https://uqload.co/embed-ccdk7pi9y0gq.html",
+                episode14: "https://uqload.co/embed-8w0nbm2zbf4h.html",
+                episode15: "https://uqload.co/embed-5bd86frhwu97.html",
+                episode16: "https://uqload.co/embed-ynzsjj1ie98v.html",
+                episode17: "https://uqload.co/embed-by0thhxix5z0.html",
+                episode18: "https://uqload.co/embed-1rrr7bt8xibk.html",
+                episode19: "https://uqload.co/embed-vn3e6naeytb4.html",
+                episode20: "https://uqload.co/embed-otwkq050uyob.html",
+                episode21: "https://uqload.co/embed-6q71e6qzc2qg.html",
+                episode22: "https://uqload.co/embed-oejtcd6aaw3a.html",
+                episode23: "https://uqload.co/embed-z0e12ridunfl.html",
+                episode24: "https://uqload.co/embed-499hw5t3hnyl.html",
+                episode25: "https://uqload.co/embed-56yf81w40rb0.html",
+                episode26: "https://uqload.co/embed-orr5lrwvpkgr.html",
+                episode27: "https://uqload.co/embed-p36xqxj0yl5i.html",
+                episode28: "https://uqload.co/embed-6lfm2hyrwsnr.html",
+                episode29: "https://uqload.co/embed-4nx2fujfmucv.html",
+                episode30: "https://uqload.co/embed-iqufwb5wju3i.html",
+                episode31: "https://uqload.co/embed-zxvclea323yp.html",
+                episode32: "https://uqload.co/embed-i87nylzhhhjp.html",
+                episode33: "https://uqload.co/embed-7k2jshirjnfo.html",
+                episode34: "https://uqload.co/embed-d647ycllarh2.html",
+                episode35: "https://uqload.co/embed-gv0xh8mfx8m1.html",
+                episode36: "https://uqload.co/embed-ls2fecyhjdag.html",
+                episode37: "https://uqload.co/embed-ypn5yt4w5ze6.html",
+                episode38: "https://uqload.co/embed-wf92d0tbf4b2.html",
+                episode39: "https://uqload.co/embed-0iw9hu7us6vq.html",
+                // Add more episodes as needed
+            },
+        };
+
+        const episodeTitles = {
+            season1: {
+                episode1: "Baslangiç",
+                episode2: "Ya Sen",
+                episode3: "Savas mi Baris mi?",
+                episode4: "Çukurdayiz",
+                episode5: "Aile her seydir!",
+                episode6: "Çukur Ailedir",
+                episode7: "Benim Mahallem",
+                episode8: "Oyun Basliyor",
+                episode9: "Vurulan Kim?",
+                episode10: "Kardesmiyiz",
+                episode11: "Kimsin Sen",
+                episode12: "Benimle oyun oynama!",
+                episode13: "Bana Masal Anlat Baba",
+                episode14: "Yüzlesme",
+                episode15: "Hazirmisin?",
+                episode16: "Babamin Oglu",
+                episode17: "Kalbim Çukurda",
+                episode18: "Çukur Evimiz",
+                episode19: "Büyük Yüzlesme",
+                episode20: "Çukur Vartolu",
+                episode21: "Dejavu",
+                episode22: "Sah Mat",
+                episode23: "Heyecani Yok",
+                episode24: "Alla beni Pulla beni",
+                episode25: "Babalar ve Ogullari",
+                episode26: "Kim Hakli Affet",
+                episode27: "Çukurda Hesap Zamani",
+                episode28: "Dügünümüz Var",
+                episode29: "Simdi Basliyoruz",
+                episode30: "Gemileri Yakmak",
+                episode31: "Çukur",
+                episode32: "Çukurun Yamacinda",
+                episode33: "Büyük Hesaplasma",
+            },
+            season2: {
+                episode1: "Çukur",
+                episode2: "Çukur Her Yerde",
+                episode3: "Üç Silahsörler",
+                episode4: "Yanimda misiniz?",
+                episode5: "Kim Kurtaracak?",
+                episode6: "Pes Etmedik",
+                episode7: "Yeni Basliyoruz",
+                episode8: "Aslan Parçasi",
+                episode9: "Babam",
+                episode10: "Vartolu Sadettin",
+                episode11: "Oglum",
+                episode12: "Çukur'un Çocuklari",
+                episode13: "Ailem",
+                episode14: "Umut",
+                episode15: "Aile Herseydir",
+                episode16: "Yamaç'i kim vurdu?",
+                episode17: "Neden?",
+                episode18: "Eve Dönüyoruz",
+                episode19: "Kardesmiyiz",
+                episode20: "Benim Mahallem",
+                episode21: "Çatapat",
+                episode22: "Medet",
+                episode23: "Dügün",
+                episode24: "Anam Babam",
+                episode25: "Basliyoruz",
+                episode26: "Çukur",
+                episode27: "Gamzendeki Çukur",
+                episode28: "Çukur'a Gel",
+                episode29: "Büyük Sir",
+                episode30: "Melek",
+                episode31: "Umut Ol",
+                episode32: "Çukur Spor",
+                episode33: "Sebebi Var",
+                episode34: "Aile Için",
+            },
+            season3: {
+                episode1: "ÇukurS3",
+                episode2: "Babamin Emaneti",
+                episode3: "Sira Kimde",
+                episode4: "Çukur Evimiz Yamaç Babamiz",
+                episode5: "Mevzu Var",
+                episode6: "Aile Herseydir",
+                episode7: "Kirmizi Balik",
+                episode8: "Nefes Al",
+                episode9: "Aileni Koru",
+                episode10: "Ikinci yari yeni basliyor!",
+                episode11: "Benim Zaafim",
+                episode12: "Koçovali Brothers",
+                episode13: "Ich Bin Çukur",
+                episode14: "Kimsin Sen",
+                episode15: "Robin Hood",
+                episode16: "Babamin Oglu",
+                episode17: "Kimin Yanindasin",
+                episode18: "Neredesin Yamaç",
+                episode19: "Büyük Yüzlesme",
+                episode20: "Babasinin Oglu",
+                episode21: "Babama Söz Verdim",
+                episode22: "Baba Olmak",
+                episode23: "Birlikte Atlatacagiz",
+                episode24: "Içerde",
+                episode25: "Çukur",
+            },
+            season4: {
+                episode1: "ÇukurS4",
+                episode2: "Affet Çukur",
+                episode3: "Çukur Yikilmaz",
+                episode4: "AzKar",
+                episode5: "Ava Giden Avlanir",
+                episode6: "Teke Tek",
+                episode7: "Çukur99",
+                episode8: "Çukur100",
+                episode9: "Benim Çukurum",
+                episode10: "Kardes",
+                episode11: "Aile Olmak",
+                episode12: "Aileni Koru",
+                episode13: "Portakal Kimde?",
+                episode14: "Selime Veda",
+                episode15: "Aileme Dokunma",
+                episode16: "Bilmece",
+                episode17: "Güvenli Ev",
+                episode18: "Biz Hayatta Kaliriz",
+                episode19: "Çukur'dan Kaçis Yok",
+                episode20: "Geri Sayim",
+                episode21: "Kaldigimiz Yerden",
+                episode22: "Efsun",
+                episode23: "Hazirmisiniz",
+                episode24: "Yeni Çukur",
+                episode25: "Yamaç",
+                episode26: "Masal",
+                episode27: "EfYam",
+                episode28: "Halay",
+                episode29: "Korkma",
+                episode30: "Babam Gibi",
+                episode31: "Celasun",
+                episode32: "Karaca",
+                episode33: "Çukur",
+                episode34: "Emmi",
+                episode35: "Bir Devir Kapandi",
+                episode36: "Biz Aileyiz",
+                episode37: "Çukur Son3",
+                episode38: "Çukur Son2",
+                episode39: "Çukur Veda",
+            },
+        };
+
+
+        function saveLastWatchedEpisode(season, episode) {
+            localStorage.setItem('lastWatchedSeason', season);
+            localStorage.setItem('lastWatchedEpisode', episode);
+
+            // Mark the episode as watched
+            let watchedEpisodes;
+            try {
+                watchedEpisodes = JSON.parse(localStorage.getItem('watchedEpisodes')) || {};
+            } catch (e) {
+                watchedEpisodes = {}; // Fallback to an empty object if parsing fails
+            }
+
+            // Initialize the season array if it doesn't exist
+            if (!watchedEpisodes[season]) {
+                watchedEpisodes[season] = [];
+            }
+
+            // Add the episode to the watched list for the specific season
+            if (!watchedEpisodes[season].includes(episode)) {
+                watchedEpisodes[season].push(episode);
+                localStorage.setItem('watchedEpisodes', JSON.stringify(watchedEpisodes));
+            }
+        }
+
+        function isEpisodeWatched(season, episode) {
+            const watchedEpisodes = JSON.parse(localStorage.getItem('watchedEpisodes') || '{}');
+            return watchedEpisodes[season] && watchedEpisodes[season].includes(episode);
+        }
+        // Function to retrieve the last watched episode
+        function getLastWatchedEpisode() {
+            return {
+                season: localStorage.getItem('lastWatchedSeason'),
+                episode: localStorage.getItem('lastWatchedEpisode'),
+            };
+        }
+
+        // Function to go to the last watched episode
+        function goToLastWatchedEpisode() {
+            const lastWatched = getLastWatchedEpisode();
+            if (lastWatched.season && lastWatched.episode) {
+                const episodeLink = serverLinks[lastWatched.season][lastWatched.episode];
+                if (episodeLink) {
+                    window.open(episodeLink, '_blank');
+                }
+            }
+        }
+
+        // Function to show episodes for a selected season
+        function showEpisodes(season, seasonName) {
+    const seasonGrid = document.getElementById("seasonGrid");
+    const episodeGrid = document.getElementById("episodeGrid");
+    const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+    const backButton = document.getElementById("backButton");
+    const sectionHeading = document.getElementById("sectionHeading");
+
+    // Hide season grid and show episode grid
+    seasonGrid.style.display = "none";
+    episodeGrid.style.display = "grid";
+    selectedSeasonTitle.style.display = "block";
+    backButton.style.display = "flex";
+
+    // Update the section heading
+    sectionHeading.textContent = "Episodes";
+
+    // Set the selected season title
+    selectedSeasonTitle.textContent = seasonName;
+
+    // Clear existing episodes
+    episodeGrid.innerHTML = "";
+
+    // Add episodes for the selected season
+    if (serverLinks[season]) {
+        for (let i = 1; i <= Object.keys(serverLinks[season]).length; i++) {
+            const episodeKey = `episode${i}`;
+            const episodeLink = serverLinks[season][episodeKey];
+            const episodeTitle = episodeTitles[season]?.[episodeKey] || `Episode ${i}`; // Use the title from episodeTitles or fallback to "Episode X"
+
+            if (episodeLink) {
+                const episodeCard = document.createElement("div");
+                episodeCard.className = "episode-card";
+                episodeCard.setAttribute("data-episode", episodeKey); // Set data-episode attribute
+                episodeCard.innerHTML = `
+                    <a href="${episodeLink}" target="_blank" onclick="saveLastWatchedEpisode('${season}', '${episodeKey}')">
+                        <div class="episode-info">
+                            <span class="episode-number">Episode ${i}</span>
+                            <span class="episode-title">${episodeTitle}</span>
+                        </div>
+                    </a>
+                `;
+
+                // Initialize watchedEpisodes
+                let watchedEpisodes;
+                try {
+                    watchedEpisodes = JSON.parse(localStorage.getItem('watchedEpisodes')) || {};
+                } catch (e) {
+                    watchedEpisodes = {}; // Fallback to an empty object if parsing fails
+                }
+
+                // Check if the episode has been watched
+                if (watchedEpisodes[season] && watchedEpisodes[season].includes(episodeKey)) {
+                    episodeCard.innerHTML += `<div class="watched-indicator">👁️</div>`;
+                }
+
+                episodeGrid.appendChild(episodeCard);
+            }
+        }
+    }
+
+    // Highlight the last watched episode
+    const lastWatched = getLastWatchedEpisode();
+    console.log("Last watched episode:", lastWatched); // Debugging
+
+    if (lastWatched.season === season) {
+        // Find the last watched episode card
+        const lastEpisodeCard = episodeGrid.querySelector(`[data-episode="${lastWatched.episode}"]`);
+        console.log("Last episode card:", lastEpisodeCard); // Debugging
+
+        if (lastEpisodeCard) {
+            lastEpisodeCard.classList.add('last-watched');
+        }
+    }
+}
+
+        // Function to show seasons again
+        function showSeasons() {
+            const seasonGrid = document.getElementById("seasonGrid");
+            const episodeGrid = document.getElementById("episodeGrid");
+            const selectedSeasonTitle = document.getElementById("selectedSeasonTitle");
+            const backButton = document.getElementById("backButton");
+            const sectionHeading = document.getElementById("sectionHeading");
+
+            // Show season grid and hide episode
+                        // Show season grid and hide episode grid
+                        seasonGrid.style.display = "grid";
+            episodeGrid.style.display = "none"; // Fix: Set to "none" instead of "grid"
+            selectedSeasonTitle.style.display = "none";
+            backButton.style.display = "none";
+
+            // Update the section heading
+            sectionHeading.textContent = "Seasons";
+        }
+
+        // Function to check progress and show "Continue Watching" button
+        function checkProgress() {
+            const lastWatched = getLastWatchedEpisode();
+            const continueWatching = document.getElementById('continueWatching');
+            if (lastWatched.season && lastWatched.episode) {
+                continueWatching.style.display = 'block';
+            } else {
+                continueWatching.style.display = 'none';
+            }
+        }
+
+        // Call this function when the page loads
+        window.onload = checkProgress;
+    </script>
 </body>
 </html>
